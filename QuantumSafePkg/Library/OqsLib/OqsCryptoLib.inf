@@ -1,0 +1,76 @@
+## @file
+#  library for the liboqs.
+#
+#  Copyright (c) 2020, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = OqsCryptoLib
+  FILE_GUID                      = 3648B175-2122-4499-AE39-0B0FFBD4FC42
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = OqsCryptoLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  liboqs/src/oqs.h
+  liboqs/src/common/common.h
+  liboqs/src/common/pqclean_shims/aes.h
+  liboqs/src/common/pqclean_shims/fips202.h
+  liboqs/src/common/pqclean_shims/nistseedexpander.c
+  liboqs/src/common/pqclean_shims/nistseedexpander.h
+  liboqs/src/common/pqclean_shims/randombytes.h
+  liboqs/src/common/pqclean_shims/sha2.h
+  liboqs/src/common/pqclean_shims/sp800-185.h
+
+  liboqs/src/common/aes/aes_c.c
+  liboqs/src/common/aes/aes_local.h
+  #liboqs/src/common/aes/aes_ossl.c
+  liboqs/src/common/aes/aes.c
+  liboqs/src/common/aes/aes.h
+  #liboqs/src/common/aes/aes128_ni.c
+  #liboqs/src/common/aes/aes256_ni.c
+
+  liboqs/src/common/sha2/sha2_c.c
+  #liboqs/src/common/sha2/sha2_ossl.c
+  liboqs/src/common/sha2/sha2.h
+
+  #liboqs/src/common/sha3/fips202.c
+  liboqs/src/common/sha3/sha3_c.c
+  #liboqs/src/common/sha3/sha3_ossl.c
+  liboqs/src/common/sha3/sha3.h
+  liboqs/src/common/sha3/sha3x4.c
+  #liboqs/src/common/sha3/sha3x4_avx2.c
+  #liboqs/src/common/sha3/sp800-185.c
+  #liboqs/src/common/sha3/keccak4x/align.h
+  #liboqs/src/common/sha3/keccak4x/brg_endian.h
+  #liboqs/src/common/sha3/keccak4x/KeccakP-1600-times4-SIMD256.c
+  #liboqs/src/common/sha3/keccak4x/KeccakP-1600-times4-SnP.h
+  #liboqs/src/common/sha3/keccak4x/SIMD256-config.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QuantumSafePkg/QuantumSafePkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D__UEFI__ -DOPENSSL_SYS_UEFI -U_WIN32 -U_WIN64
+  # warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  # warning C4101: 'outlen': unreferenced local variable
+  # warning C4189: 'ks': local variable is initialized but not referenced
+  MSFT:*_*_*_CC_FLAGS = /wd4267 /wd4101 /wd4189

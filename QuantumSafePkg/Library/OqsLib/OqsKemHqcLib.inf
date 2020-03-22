@@ -1,0 +1,180 @@
+## @file
+#  library for the liboqs.
+#
+#  Copyright (c) 2020, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = OqsKemHqcLib
+  FILE_GUID                      = 8CB5935F-A581-487D-948B-60BCE73FC5BE
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = OqsKemHqcLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  liboqs/src/oqs.h
+  liboqs/src/common/common.h
+  liboqs/src/common/pqclean_shims/aes.h
+  liboqs/src/common/pqclean_shims/fips202.h
+  liboqs/src/common/pqclean_shims/randombytes.h
+  liboqs/src/common/pqclean_shims/sha2.h
+  liboqs/src/common/pqclean_shims/sp800-185.h
+  liboqs/src/kem/kem.h
+  liboqs/src/kem/hqc/kem_hqc.h
+  liboqs/src/kem/hqc/kem_hqc_128.c
+  liboqs/src/kem/hqc/kem_hqc_192.c
+  liboqs/src/kem/hqc/kem_hqc_256.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_avx2/api.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_avx2/code.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_avx2/fft.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_avx2/gf.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_avx2/gf2x.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_avx2/hqc.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_avx2/parameters.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_avx2/parsing.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_avx2/reed_muller.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_avx2/reed_solomon.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_avx2/vector.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_avx2/code.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_avx2/fft.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_avx2/gf.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_avx2/gf2x.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_avx2/hqc.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_avx2/kem.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_avx2/parsing.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_avx2/reed_muller.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_avx2/reed_solomon.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_avx2/vector.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_clean/api.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_clean/code.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_clean/fft.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_clean/gf.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_clean/gf2x.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_clean/hqc.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_clean/parameters.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_clean/parsing.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_clean/reed_muller.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_clean/reed_solomon.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_clean/vector.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_clean/code.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_clean/fft.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_clean/gf.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_clean/gf2x.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_clean/hqc.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_clean/kem.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_clean/parsing.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_clean/reed_muller.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_clean/reed_solomon.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-128_clean/vector.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_avx2/api.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_avx2/code.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_avx2/fft.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_avx2/gf.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_avx2/gf2x.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_avx2/hqc.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_avx2/parameters.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_avx2/parsing.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_avx2/reed_muller.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_avx2/reed_solomon.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_avx2/vector.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_avx2/code.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_avx2/fft.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_avx2/gf.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_avx2/gf2x.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_avx2/hqc.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_avx2/kem.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_avx2/parsing.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_avx2/reed_muller.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_avx2/reed_solomon.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_avx2/vector.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_clean/api.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_clean/code.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_clean/fft.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_clean/gf.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_clean/gf2x.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_clean/hqc.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_clean/parameters.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_clean/parsing.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_clean/reed_muller.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_clean/reed_solomon.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_clean/vector.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_clean/code.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_clean/fft.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_clean/gf.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_clean/gf2x.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_clean/hqc.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_clean/kem.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_clean/parsing.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_clean/reed_muller.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_clean/reed_solomon.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-192_clean/vector.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_avx2/api.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_avx2/code.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_avx2/fft.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_avx2/gf.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_avx2/gf2x.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_avx2/hqc.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_avx2/parameters.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_avx2/parsing.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_avx2/reed_muller.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_avx2/reed_solomon.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_avx2/vector.h
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_avx2/code.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_avx2/fft.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_avx2/gf.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_avx2/gf2x.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_avx2/hqc.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_avx2/kem.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_avx2/parsing.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_avx2/reed_muller.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_avx2/reed_solomon.c
+  #liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_avx2/vector.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_clean/api.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_clean/code.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_clean/fft.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_clean/gf.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_clean/gf2x.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_clean/hqc.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_clean/parameters.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_clean/parsing.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_clean/reed_muller.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_clean/reed_solomon.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_clean/vector.h
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_clean/code.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_clean/fft.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_clean/gf.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_clean/gf2x.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_clean/hqc.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_clean/kem.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_clean/parsing.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_clean/reed_muller.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_clean/reed_solomon.c
+  liboqs/src/kem/hqc/pqclean_hqc-rmrs-256_clean/vector.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QuantumSafePkg/QuantumSafePkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D__UEFI__ -DOPENSSL_SYS_UEFI -U_WIN32 -U_WIN64
+  # warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  # warning C4101: 'outlen': unreferenced local variable
+  # warning C4189: 'ks': local variable is initialized but not referenced
+  MSFT:*_*_*_CC_FLAGS = /wd4267 /wd4101 /wd4189 /Gs4194304

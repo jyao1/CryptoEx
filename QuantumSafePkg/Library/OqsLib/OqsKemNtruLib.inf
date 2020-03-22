@@ -1,0 +1,214 @@
+## @file
+#  library for the liboqs.
+#
+#  Copyright (c) 2020, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = OqsKemNtruLib
+  FILE_GUID                      = ADE1EF38-ED47-4841-8571-21A339E0FD73
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = OqsKemNtruLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  liboqs/src/oqs.h
+  liboqs/src/common/common.h
+  liboqs/src/common/pqclean_shims/aes.h
+  liboqs/src/common/pqclean_shims/fips202.h
+  liboqs/src/common/pqclean_shims/randombytes.h
+  liboqs/src/common/pqclean_shims/sha2.h
+  liboqs/src/common/pqclean_shims/sp800-185.h
+  liboqs/src/kem/kem.h
+  liboqs/src/kem/ntru/kem_ntru.h
+  liboqs/src/kem/ntru/kem_ntru_hps2048509.c
+  liboqs/src/kem/ntru/kem_ntru_hps2048677.c
+  liboqs/src/kem/ntru/kem_ntru_hps4096821.c
+  liboqs/src/kem/ntru/kem_ntru_hrss701.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048509_avx2/api.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048509_avx2/cmov.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048509_avx2/crypto_sort_int32.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048509_avx2/owcpa.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048509_avx2/params.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048509_avx2/poly.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048509_avx2/poly_r2_inv.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048509_avx2/sample.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048509_avx2/cmov.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048509_avx2/crypto_sort_int32.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048509_avx2/kem.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048509_avx2/owcpa.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048509_avx2/pack3.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048509_avx2/packq.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048509_avx2/poly.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048509_avx2/poly_lift.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048509_avx2/poly_r2_inv.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048509_avx2/poly_s3_inv.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048509_avx2/sample.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048509_avx2/sample_iid.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048509_clean/api.h
+  liboqs/src/kem/ntru/pqclean_ntruhps2048509_clean/cmov.h
+  liboqs/src/kem/ntru/pqclean_ntruhps2048509_clean/crypto_sort_int32.h
+  liboqs/src/kem/ntru/pqclean_ntruhps2048509_clean/owcpa.h
+  liboqs/src/kem/ntru/pqclean_ntruhps2048509_clean/params.h
+  liboqs/src/kem/ntru/pqclean_ntruhps2048509_clean/poly.h
+  liboqs/src/kem/ntru/pqclean_ntruhps2048509_clean/sample.h
+  liboqs/src/kem/ntru/pqclean_ntruhps2048509_clean/cmov.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048509_clean/crypto_sort_int32.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048509_clean/kem.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048509_clean/owcpa.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048509_clean/pack3.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048509_clean/packq.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048509_clean/poly.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048509_clean/poly_lift.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048509_clean/poly_mod.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048509_clean/poly_r2_inv.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048509_clean/poly_rq_mul.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048509_clean/poly_s3_inv.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048509_clean/sample.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048509_clean/sample_iid.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048677_avx2/api.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048677_avx2/cmov.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048677_avx2/crypto_sort_int32.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048677_avx2/owcpa.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048677_avx2/params.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048677_avx2/poly.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048677_avx2/poly_r2_inv.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048677_avx2/sample.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048677_avx2/cmov.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048677_avx2/crypto_sort_int32.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048677_avx2/kem.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048677_avx2/owcpa.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048677_avx2/pack3.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048677_avx2/packq.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048677_avx2/poly.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048677_avx2/poly_lift.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048677_avx2/poly_r2_inv.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048677_avx2/poly_s3_inv.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048677_avx2/sample.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps2048677_avx2/sample_iid.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048677_clean/api.h
+  liboqs/src/kem/ntru/pqclean_ntruhps2048677_clean/cmov.h
+  liboqs/src/kem/ntru/pqclean_ntruhps2048677_clean/crypto_sort_int32.h
+  liboqs/src/kem/ntru/pqclean_ntruhps2048677_clean/owcpa.h
+  liboqs/src/kem/ntru/pqclean_ntruhps2048677_clean/params.h
+  liboqs/src/kem/ntru/pqclean_ntruhps2048677_clean/poly.h
+  liboqs/src/kem/ntru/pqclean_ntruhps2048677_clean/sample.h
+  liboqs/src/kem/ntru/pqclean_ntruhps2048677_clean/cmov.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048677_clean/crypto_sort_int32.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048677_clean/kem.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048677_clean/owcpa.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048677_clean/pack3.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048677_clean/packq.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048677_clean/poly.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048677_clean/poly_lift.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048677_clean/poly_mod.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048677_clean/poly_r2_inv.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048677_clean/poly_rq_mul.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048677_clean/poly_s3_inv.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048677_clean/sample.c
+  liboqs/src/kem/ntru/pqclean_ntruhps2048677_clean/sample_iid.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps4096821_avx2/api.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps4096821_avx2/cmov.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps4096821_avx2/crypto_sort_int32.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps4096821_avx2/owcpa.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps4096821_avx2/params.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps4096821_avx2/poly.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps4096821_avx2/poly_r2_inv.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps4096821_avx2/sample.h
+  #liboqs/src/kem/ntru/pqclean_ntruhps4096821_avx2/cmov.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps4096821_avx2/crypto_sort_int32.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps4096821_avx2/kem.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps4096821_avx2/owcpa.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps4096821_avx2/pack3.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps4096821_avx2/packq.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps4096821_avx2/poly.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps4096821_avx2/poly_lift.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps4096821_avx2/poly_r2_inv.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps4096821_avx2/poly_s3_inv.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps4096821_avx2/sample.c
+  #liboqs/src/kem/ntru/pqclean_ntruhps4096821_avx2/sample_iid.c
+  liboqs/src/kem/ntru/pqclean_ntruhps4096821_clean/api.h
+  liboqs/src/kem/ntru/pqclean_ntruhps4096821_clean/cmov.h
+  liboqs/src/kem/ntru/pqclean_ntruhps4096821_clean/crypto_sort_int32.h
+  liboqs/src/kem/ntru/pqclean_ntruhps4096821_clean/owcpa.h
+  liboqs/src/kem/ntru/pqclean_ntruhps4096821_clean/params.h
+  liboqs/src/kem/ntru/pqclean_ntruhps4096821_clean/poly.h
+  liboqs/src/kem/ntru/pqclean_ntruhps4096821_clean/sample.h
+  liboqs/src/kem/ntru/pqclean_ntruhps4096821_clean/cmov.c
+  liboqs/src/kem/ntru/pqclean_ntruhps4096821_clean/crypto_sort_int32.c
+  liboqs/src/kem/ntru/pqclean_ntruhps4096821_clean/kem.c
+  liboqs/src/kem/ntru/pqclean_ntruhps4096821_clean/owcpa.c
+  liboqs/src/kem/ntru/pqclean_ntruhps4096821_clean/pack3.c
+  liboqs/src/kem/ntru/pqclean_ntruhps4096821_clean/packq.c
+  liboqs/src/kem/ntru/pqclean_ntruhps4096821_clean/poly.c
+  liboqs/src/kem/ntru/pqclean_ntruhps4096821_clean/poly_lift.c
+  liboqs/src/kem/ntru/pqclean_ntruhps4096821_clean/poly_mod.c
+  liboqs/src/kem/ntru/pqclean_ntruhps4096821_clean/poly_r2_inv.c
+  liboqs/src/kem/ntru/pqclean_ntruhps4096821_clean/poly_rq_mul.c
+  liboqs/src/kem/ntru/pqclean_ntruhps4096821_clean/poly_s3_inv.c
+  liboqs/src/kem/ntru/pqclean_ntruhps4096821_clean/sample.c
+  liboqs/src/kem/ntru/pqclean_ntruhps4096821_clean/sample_iid.c
+  #liboqs/src/kem/ntru/pqclean_ntruhrss701_avx2/api.h
+  #liboqs/src/kem/ntru/pqclean_ntruhrss701_avx2/cmov.h
+  #liboqs/src/kem/ntru/pqclean_ntruhrss701_avx2/owcpa.h
+  #liboqs/src/kem/ntru/pqclean_ntruhrss701_avx2/params.h
+  #liboqs/src/kem/ntru/pqclean_ntruhrss701_avx2/poly.h
+  #liboqs/src/kem/ntru/pqclean_ntruhrss701_avx2/poly_r2_inv.h
+  #liboqs/src/kem/ntru/pqclean_ntruhrss701_avx2/sample.h
+  #liboqs/src/kem/ntru/pqclean_ntruhrss701_avx2/cmov.c
+  #liboqs/src/kem/ntru/pqclean_ntruhrss701_avx2/kem.c
+  #liboqs/src/kem/ntru/pqclean_ntruhrss701_avx2/owcpa.c
+  #liboqs/src/kem/ntru/pqclean_ntruhrss701_avx2/pack3.c
+  #liboqs/src/kem/ntru/pqclean_ntruhrss701_avx2/packq.c
+  #liboqs/src/kem/ntru/pqclean_ntruhrss701_avx2/poly.c
+  #liboqs/src/kem/ntru/pqclean_ntruhrss701_avx2/poly_r2_inv.c
+  #liboqs/src/kem/ntru/pqclean_ntruhrss701_avx2/poly_s3_inv.c
+  #liboqs/src/kem/ntru/pqclean_ntruhrss701_avx2/sample.c
+  #liboqs/src/kem/ntru/pqclean_ntruhrss701_avx2/sample_iid.c
+  liboqs/src/kem/ntru/pqclean_ntruhrss701_clean/api.h
+  liboqs/src/kem/ntru/pqclean_ntruhrss701_clean/cmov.h
+  liboqs/src/kem/ntru/pqclean_ntruhrss701_clean/owcpa.h
+  liboqs/src/kem/ntru/pqclean_ntruhrss701_clean/params.h
+  liboqs/src/kem/ntru/pqclean_ntruhrss701_clean/poly.h
+  liboqs/src/kem/ntru/pqclean_ntruhrss701_clean/sample.h
+  liboqs/src/kem/ntru/pqclean_ntruhrss701_clean/cmov.c
+  liboqs/src/kem/ntru/pqclean_ntruhrss701_clean/kem.c
+  liboqs/src/kem/ntru/pqclean_ntruhrss701_clean/owcpa.c
+  liboqs/src/kem/ntru/pqclean_ntruhrss701_clean/pack3.c
+  liboqs/src/kem/ntru/pqclean_ntruhrss701_clean/packq.c
+  liboqs/src/kem/ntru/pqclean_ntruhrss701_clean/poly.c
+  liboqs/src/kem/ntru/pqclean_ntruhrss701_clean/poly_lift.c
+  liboqs/src/kem/ntru/pqclean_ntruhrss701_clean/poly_mod.c
+  liboqs/src/kem/ntru/pqclean_ntruhrss701_clean/poly_r2_inv.c
+  liboqs/src/kem/ntru/pqclean_ntruhrss701_clean/poly_rq_mul.c
+  liboqs/src/kem/ntru/pqclean_ntruhrss701_clean/poly_s3_inv.c
+  liboqs/src/kem/ntru/pqclean_ntruhrss701_clean/sample.c
+  liboqs/src/kem/ntru/pqclean_ntruhrss701_clean/sample_iid.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QuantumSafePkg/QuantumSafePkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D__UEFI__ -DOPENSSL_SYS_UEFI -U_WIN32 -U_WIN64
+  # warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  # warning C4101: 'outlen': unreferenced local variable
+  # warning C4189: 'ks': local variable is initialized but not referenced
+  MSFT:*_*_*_CC_FLAGS = /wd4267 /wd4101 /wd4189

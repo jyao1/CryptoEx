@@ -1,0 +1,102 @@
+## @file
+#  library for the liboqs.
+#
+#  Copyright (c) 2020, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = OqsSigFalconLib
+  FILE_GUID                      = 69C85411-3112-4B9B-A74D-E1E884700360
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = OqsSigFalconLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  liboqs/src/oqs.h
+  liboqs/src/common/common.h
+  liboqs/src/common/pqclean_shims/aes.h
+  liboqs/src/common/pqclean_shims/fips202.h
+  liboqs/src/common/pqclean_shims/randombytes.h
+  liboqs/src/common/pqclean_shims/sha2.h
+  liboqs/src/common/pqclean_shims/sp800-185.h
+  liboqs/src/sig/sig.h
+  liboqs/src/sig/falcon/sig_falcon.h
+  liboqs/src/sig/falcon/sig_falcon_1024.c
+  liboqs/src/sig/falcon/sig_falcon_512.c
+  #liboqs/src/sig/falcon/pqclean_falcon-1024_avx2/api.h
+  #liboqs/src/sig/falcon/pqclean_falcon-1024_avx2/fpr.h
+  #liboqs/src/sig/falcon/pqclean_falcon-1024_avx2/inner.h
+  #liboqs/src/sig/falcon/pqclean_falcon-1024_avx2/codec.c
+  #liboqs/src/sig/falcon/pqclean_falcon-1024_avx2/common.c
+  #liboqs/src/sig/falcon/pqclean_falcon-1024_avx2/fft.c
+  #liboqs/src/sig/falcon/pqclean_falcon-1024_avx2/fpr.c
+  #liboqs/src/sig/falcon/pqclean_falcon-1024_avx2/keygen.c
+  #liboqs/src/sig/falcon/pqclean_falcon-1024_avx2/pqclean.c
+  #liboqs/src/sig/falcon/pqclean_falcon-1024_avx2/rng.c
+  #liboqs/src/sig/falcon/pqclean_falcon-1024_avx2/sign.c
+  #liboqs/src/sig/falcon/pqclean_falcon-1024_avx2/vrfy.c
+  liboqs/src/sig/falcon/pqclean_falcon-1024_clean/api.h
+  liboqs/src/sig/falcon/pqclean_falcon-1024_clean/fpr.h
+  liboqs/src/sig/falcon/pqclean_falcon-1024_clean/inner.h
+  liboqs/src/sig/falcon/pqclean_falcon-1024_clean/codec.c
+  liboqs/src/sig/falcon/pqclean_falcon-1024_clean/common.c
+  liboqs/src/sig/falcon/pqclean_falcon-1024_clean/fft.c
+  liboqs/src/sig/falcon/pqclean_falcon-1024_clean/fpr.c
+  liboqs/src/sig/falcon/pqclean_falcon-1024_clean/keygen.c
+  liboqs/src/sig/falcon/pqclean_falcon-1024_clean/pqclean.c
+  liboqs/src/sig/falcon/pqclean_falcon-1024_clean/rng.c
+  liboqs/src/sig/falcon/pqclean_falcon-1024_clean/sign.c
+  liboqs/src/sig/falcon/pqclean_falcon-1024_clean/vrfy.c
+  #liboqs/src/sig/falcon/pqclean_falcon-512_avx2/api.h
+  #liboqs/src/sig/falcon/pqclean_falcon-512_avx2/fpr.h
+  #liboqs/src/sig/falcon/pqclean_falcon-512_avx2/inner.h
+  #liboqs/src/sig/falcon/pqclean_falcon-512_avx2/codec.c
+  #liboqs/src/sig/falcon/pqclean_falcon-512_avx2/common.c
+  #liboqs/src/sig/falcon/pqclean_falcon-512_avx2/fft.c
+  #liboqs/src/sig/falcon/pqclean_falcon-512_avx2/fpr.c
+  #liboqs/src/sig/falcon/pqclean_falcon-512_avx2/keygen.c
+  #liboqs/src/sig/falcon/pqclean_falcon-512_avx2/pqclean.c
+  #liboqs/src/sig/falcon/pqclean_falcon-512_avx2/rng.c
+  #liboqs/src/sig/falcon/pqclean_falcon-512_avx2/sign.c
+  #liboqs/src/sig/falcon/pqclean_falcon-512_avx2/vrfy.c
+  liboqs/src/sig/falcon/pqclean_falcon-512_clean/api.h
+  liboqs/src/sig/falcon/pqclean_falcon-512_clean/fpr.h
+  liboqs/src/sig/falcon/pqclean_falcon-512_clean/inner.h
+  liboqs/src/sig/falcon/pqclean_falcon-512_clean/codec.c
+  liboqs/src/sig/falcon/pqclean_falcon-512_clean/common.c
+  liboqs/src/sig/falcon/pqclean_falcon-512_clean/fft.c
+  liboqs/src/sig/falcon/pqclean_falcon-512_clean/fpr.c
+  liboqs/src/sig/falcon/pqclean_falcon-512_clean/keygen.c
+  liboqs/src/sig/falcon/pqclean_falcon-512_clean/pqclean.c
+  liboqs/src/sig/falcon/pqclean_falcon-512_clean/rng.c
+  liboqs/src/sig/falcon/pqclean_falcon-512_clean/sign.c
+  liboqs/src/sig/falcon/pqclean_falcon-512_clean/vrfy.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QuantumSafePkg/QuantumSafePkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D__UEFI__ -DOPENSSL_SYS_UEFI -U_WIN32 -U_WIN64
+  # warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  # warning C4101: 'outlen': unreferenced local variable
+  # warning C4189: 'ks': local variable is initialized but not referenced
+  # warning C4146: unary minus operator applied to unsigned type, result still unsigned
+  MSFT:*_*_*_CC_FLAGS = /wd4267 /wd4101 /wd4189 /wd4146 /GL- /Gs1048576

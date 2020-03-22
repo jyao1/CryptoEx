@@ -1,0 +1,88 @@
+## @file
+#  library for the liboqs.
+#
+#  Copyright (c) 2020, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = OqsKemBikeLib
+  FILE_GUID                      = 4FC5FA2E-4950-43AD-9D99-1B5E87F4D257
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = OqsKemBikeLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  liboqs/src/oqs.h
+  liboqs/src/common/common.h
+  liboqs/src/common/pqclean_shims/aes.h
+  liboqs/src/common/pqclean_shims/fips202.h
+  liboqs/src/common/pqclean_shims/randombytes.h
+  liboqs/src/common/pqclean_shims/sha2.h
+  liboqs/src/common/pqclean_shims/sp800-185.h
+  liboqs/src/kem/kem.h
+  liboqs/src/kem/bike/functions_renaming.h
+  liboqs/src/kem/bike/kem_bike.h
+  liboqs/src/kem/bike/kem_bike.c
+  liboqs/src/kem/bike/additional/aes_ctr_prf.h
+  liboqs/src/kem/bike/additional/aes_wrap.h
+  liboqs/src/kem/bike/additional/bike_defs.h
+  liboqs/src/kem/bike/additional/cleanup.h
+  liboqs/src/kem/bike/additional/decode.h
+  liboqs/src/kem/bike/additional/defs.h
+  liboqs/src/kem/bike/additional/error.h
+  liboqs/src/kem/bike/additional/gf2x.h
+  liboqs/src/kem/bike/additional/gf2x_internal.h
+  liboqs/src/kem/bike/additional/openssl_utils.h
+  liboqs/src/kem/bike/additional/parallel_hash.h
+  liboqs/src/kem/bike/additional/sampling.h
+  liboqs/src/kem/bike/additional/sha.h
+  liboqs/src/kem/bike/additional/types.h
+  liboqs/src/kem/bike/additional/utilities.h
+  liboqs/src/kem/bike/additional/aes_ctr_prf.c
+  liboqs/src/kem/bike/additional/decode.c
+  liboqs/src/kem/bike/additional/error.c
+  liboqs/src/kem/bike/additional/gf2x_mul.c
+  liboqs/src/kem/bike/additional/gf2x_portable.c
+  liboqs/src/kem/bike/additional/kem.c
+  liboqs/src/kem/bike/additional/kem_cpa.c
+  liboqs/src/kem/bike/additional/openssl_utils.c
+  liboqs/src/kem/bike/additional/parallel_hash.c
+  liboqs/src/kem/bike/additional/sampling.c
+  liboqs/src/kem/bike/additional/sampling_portable.c
+  #liboqs/src/kem/bike/additional/secure_decode_avx2.c
+  #liboqs/src/kem/bike/additional/secure_decode_avx512.c
+  liboqs/src/kem/bike/additional/secure_decode_portable.c
+  liboqs/src/kem/bike/additional/utilities.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QuantumSafePkg/QuantumSafePkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D__UEFI__ -DOPENSSL_SYS_UEFI -U_WIN32 -U_WIN64
+  # warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  # warning C4101: 'outlen': unreferenced local variable
+  # warning C4189: 'ks': local variable is initialized but not referenced
+  # warning C4324: 'syndrome_s': structure was padded due to alignment specifier
+  # warning C4028: formal parameter 3 different from declaration
+  # warning C4244: 'function': conversion from 'uint64_t' to 'const uint32_t', possible loss of data
+  # warning C4146: unary minus operator applied to unsigned type, result still unsigned
+  # warning C4477: 'printf' : format string '%.16lx' requires an argument of type 'unsigned long', but variadic argument 1 has type 'uint64_t'
+  MSFT:*_*_*_CC_FLAGS = /wd4267 /wd4101 /wd4189 /wd4324 /wd4028 /wd4244 /wd4146 /wd4477

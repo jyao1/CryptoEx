@@ -1,0 +1,108 @@
+## @file
+#  library for the liboqs.
+#
+#  Copyright (c) 2020, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = OqsKemSikeLib
+  FILE_GUID                      = D36035D0-26F9-4F3E-ADFC-65100AD47B3F
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = OqsKemSikeLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  liboqs/src/oqs.h
+  liboqs/src/common/common.h
+  liboqs/src/common/pqclean_shims/aes.h
+  liboqs/src/common/pqclean_shims/fips202.h
+  liboqs/src/common/pqclean_shims/randombytes.h
+  liboqs/src/common/pqclean_shims/sha2.h
+  liboqs/src/common/pqclean_shims/sp800-185.h
+  liboqs/src/kem/kem.h
+  liboqs/src/kem/sike/kem_sike.h
+  liboqs/src/kem/sike/oqs_namespace_sike.h
+  liboqs/src/kem/sike/oqs_namespace_sike_compressed.h
+  liboqs/src/kem/sike/kem_sike.c
+  liboqs/src/kem/sike/external/config.h
+  liboqs/src/kem/sike/external/internal.h
+  #liboqs/src/kem/sike/external/ec_isogeny.c
+  #liboqs/src/kem/sike/external/fpx.c
+  #liboqs/src/kem/sike/external/sidh.c
+  #liboqs/src/kem/sike/external/sike.c
+  #liboqs/src/kem/sike/external/compression/dlog.c
+  #liboqs/src/kem/sike/external/compression/pairing.c
+  #liboqs/src/kem/sike/external/compression/sidh_compressed.c
+  #liboqs/src/kem/sike/external/compression/sike_compressed.c
+  #liboqs/src/kem/sike/external/compression/torsion_basis.c
+  liboqs/src/kem/sike/external/P434/P434_api.h
+  liboqs/src/kem/sike/external/P434/P434_compressed_api.h
+  liboqs/src/kem/sike/external/P434/P434_internal.h
+  liboqs/src/kem/sike/external/P434/P434.c
+  liboqs/src/kem/sike/external/P434/P434_compressed.c
+  #liboqs/src/kem/sike/external/P434/P434_compressed_dlog_tables.c
+  #liboqs/src/kem/sike/external/P434/P434_compressed_pair_tables.c
+  #liboqs/src/kem/sike/external/P434/AMD64/fp_x64.c
+  #liboqs/src/kem/sike/external/P434/ARM64/fp_arm64.c
+  #liboqs/src/kem/sike/external/P434/generic/fp_generic.c
+  liboqs/src/kem/sike/external/P503/P503_api.h
+  liboqs/src/kem/sike/external/P503/P503_compressed_api.h
+  liboqs/src/kem/sike/external/P503/P503_internal.h
+  liboqs/src/kem/sike/external/P503/P503.c
+  liboqs/src/kem/sike/external/P503/P503_compressed.c
+  #liboqs/src/kem/sike/external/P503/P503_compressed_dlog_tables.c
+  #liboqs/src/kem/sike/external/P503/P503_compressed_pair_tables.c
+  #liboqs/src/kem/sike/external/P503/AMD64/fp_x64.c
+  #liboqs/src/kem/sike/external/P503/ARM64/fp_arm64.c
+  #liboqs/src/kem/sike/external/P503/generic/fp_generic.c
+  liboqs/src/kem/sike/external/P610/P610_api.h
+  liboqs/src/kem/sike/external/P610/P610_compressed_api.h
+  liboqs/src/kem/sike/external/P610/P610_internal.h
+  liboqs/src/kem/sike/external/P610/P610.c
+  liboqs/src/kem/sike/external/P610/P610_compressed.c
+  #liboqs/src/kem/sike/external/P610/P610_compressed_dlog_tables.c
+  #liboqs/src/kem/sike/external/P610/P610_compressed_pair_tables.c
+  #liboqs/src/kem/sike/external/P610/AMD64/fp_x64.c
+  #liboqs/src/kem/sike/external/P610/ARM64/fp_arm64.c
+  #liboqs/src/kem/sike/external/P610/generic/fp_generic.c
+  liboqs/src/kem/sike/external/P751/P751_api.h
+  liboqs/src/kem/sike/external/P751/P751_compressed_api.h
+  liboqs/src/kem/sike/external/P751/P751_internal.h
+  liboqs/src/kem/sike/external/P751/P751.c
+  liboqs/src/kem/sike/external/P751/P751_compressed.c
+  #liboqs/src/kem/sike/external/P751/P751_compressed_dlog_tables.c
+  #liboqs/src/kem/sike/external/P751/P751_compressed_pair_tables.c
+  #liboqs/src/kem/sike/external/P751/AMD64/fp_x64.c
+  #liboqs/src/kem/sike/external/P751/ARM64/fp_arm64.c
+  #liboqs/src/kem/sike/external/P751/generic/fp_generic.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QuantumSafePkg/QuantumSafePkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D__UEFI__ -DOPENSSL_SYS_UEFI -U_WIN32 -U_WIN64
+  *_*_X64_CC_FLAGS = -D_AMD64_
+  *_*_IA32_CC_FLAGS = -D_X86_
+  # warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  # warning C4101: 'outlen': unreferenced local variable
+  # warning C4189: 'ks': local variable is initialized but not referenced
+  # warning C4133: '=': incompatible types - from 'int (__cdecl *)(unsigned char *,unsigned char *)' to 'OQS_STATUS (__cdecl *)(uint8_t *,uint8_t *)'
+  MSFT:*_*_*_CC_FLAGS = /wd4267 /wd4101 /wd4189 /wd4133 /GL- /Gs1048576

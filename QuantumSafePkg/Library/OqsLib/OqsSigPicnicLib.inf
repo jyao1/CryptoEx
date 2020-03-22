@@ -1,0 +1,179 @@
+## @file
+#  library for the liboqs.
+#
+#  Copyright (c) 2020, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = OqsSigPicnicLib
+  FILE_GUID                      = 2152D561-47D5-4F66-B99C-BC05B43B71E8
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = OqsSigPicnicLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  liboqs/src/oqs.h
+  liboqs/src/common/common.h
+  liboqs/src/common/pqclean_shims/aes.h
+  liboqs/src/common/pqclean_shims/fips202.h
+  liboqs/src/common/pqclean_shims/randombytes.h
+  liboqs/src/common/pqclean_shims/sha2.h
+  liboqs/src/common/pqclean_shims/sp800-185.h
+  liboqs/src/sig/sig.h
+  liboqs/src/sig/picnic/sig_picnic.h
+  liboqs/src/sig/picnic/sig_picnic.c
+  liboqs/src/sig/picnic/external/bitstream.h
+  liboqs/src/sig/picnic/external/compat.h
+  liboqs/src/sig/picnic/external/cpu.h
+  liboqs/src/sig/picnic/external/crypto_sign.h
+  liboqs/src/sig/picnic/external/endian_compat.h
+  liboqs/src/sig/picnic/external/io.h
+  liboqs/src/sig/picnic/external/kdf_shake.h
+  liboqs/src/sig/picnic/external/lowmc.h
+  liboqs/src/sig/picnic/external/lowmc_128_128_20.h
+  liboqs/src/sig/picnic/external/lowmc_128_128_20_fns_s128.h
+  liboqs/src/sig/picnic/external/lowmc_128_128_20_fns_s256.h
+  liboqs/src/sig/picnic/external/lowmc_128_128_20_fns_uint64.h
+  liboqs/src/sig/picnic/external/lowmc_129_129_4.h
+  liboqs/src/sig/picnic/external/lowmc_129_129_4_fns_s128.h
+  liboqs/src/sig/picnic/external/lowmc_129_129_4_fns_s256.h
+  liboqs/src/sig/picnic/external/lowmc_129_129_4_fns_uint64.h
+  liboqs/src/sig/picnic/external/lowmc_192_192_30.h
+  liboqs/src/sig/picnic/external/lowmc_192_192_30_fns_s128.h
+  liboqs/src/sig/picnic/external/lowmc_192_192_30_fns_s256.h
+  liboqs/src/sig/picnic/external/lowmc_192_192_30_fns_uint64.h
+  liboqs/src/sig/picnic/external/lowmc_192_192_4.h
+  liboqs/src/sig/picnic/external/lowmc_192_192_4_fns_s128.h
+  liboqs/src/sig/picnic/external/lowmc_192_192_4_fns_s256.h
+  liboqs/src/sig/picnic/external/lowmc_192_192_4_fns_uint64.h
+  liboqs/src/sig/picnic/external/lowmc_255_255_4.h
+  liboqs/src/sig/picnic/external/lowmc_255_255_4_fns_s128.h
+  liboqs/src/sig/picnic/external/lowmc_255_255_4_fns_s256.h
+  liboqs/src/sig/picnic/external/lowmc_255_255_4_fns_uint64.h
+  liboqs/src/sig/picnic/external/lowmc_256_256_38.h
+  liboqs/src/sig/picnic/external/lowmc_256_256_38_fns_s128.h
+  liboqs/src/sig/picnic/external/lowmc_256_256_38_fns_s256.h
+  liboqs/src/sig/picnic/external/lowmc_256_256_38_fns_uint64.h
+  liboqs/src/sig/picnic/external/lowmc_fns_undef.h
+  liboqs/src/sig/picnic/external/lowmc_pars.h
+  liboqs/src/sig/picnic/external/macros.h
+  liboqs/src/sig/picnic/external/mpc_lowmc.h
+  liboqs/src/sig/picnic/external/mzd_additional.h
+  liboqs/src/sig/picnic/external/oqs_picnic_macros.h
+  liboqs/src/sig/picnic/external/picnic.h
+  liboqs/src/sig/picnic/external/picnic3_impl.h
+  liboqs/src/sig/picnic/external/picnic3_simulate.h
+  liboqs/src/sig/picnic/external/picnic3_tree.h
+  liboqs/src/sig/picnic/external/picnic3_types.h
+  liboqs/src/sig/picnic/external/picnic_impl.h
+  liboqs/src/sig/picnic/external/picnic_instances.h
+  liboqs/src/sig/picnic/external/randomness.h
+  liboqs/src/sig/picnic/external/simd.h
+  liboqs/src/sig/picnic/external/bitstream.c
+  liboqs/src/sig/picnic/external/compat.c
+  liboqs/src/sig/picnic/external/cpu.c
+  liboqs/src/sig/picnic/external/io.c
+  liboqs/src/sig/picnic/external/lowmc.c
+  liboqs/src/sig/picnic/external/lowmc_128_128_20.c
+  liboqs/src/sig/picnic/external/lowmc_129_129_4.c
+  liboqs/src/sig/picnic/external/lowmc_192_192_30.c
+  liboqs/src/sig/picnic/external/lowmc_192_192_4.c
+  liboqs/src/sig/picnic/external/lowmc_255_255_4.c
+  liboqs/src/sig/picnic/external/lowmc_256_256_38.c
+  liboqs/src/sig/picnic/external/mpc_lowmc.c
+  liboqs/src/sig/picnic/external/mzd_additional.c
+  liboqs/src/sig/picnic/external/picnic.c
+  liboqs/src/sig/picnic/external/picnic3_impl.c
+  liboqs/src/sig/picnic/external/picnic3_simulate.c
+  liboqs/src/sig/picnic/external/picnic3_tree.c
+  liboqs/src/sig/picnic/external/picnic3_types.c
+  liboqs/src/sig/picnic/external/picnic_impl.c
+  liboqs/src/sig/picnic/external/picnic_instances.c
+  liboqs/src/sig/picnic/external/randomness.c
+  #liboqs/src/sig/picnic/external/picnic3_L1/api.h
+  #liboqs/src/sig/picnic/external/picnic3_L1/sign.c
+  #liboqs/src/sig/picnic/external/picnic3_L3/api.h
+  #liboqs/src/sig/picnic/external/picnic3_L3/sign.c
+  #liboqs/src/sig/picnic/external/picnic3_L5/api.h
+  #liboqs/src/sig/picnic/external/picnic3_L5/sign.c
+  #liboqs/src/sig/picnic/external/picnic_L1_FS/api.h
+  #liboqs/src/sig/picnic/external/picnic_L1_FS/sign.c
+  #liboqs/src/sig/picnic/external/picnic_L1_full/api.h
+  #liboqs/src/sig/picnic/external/picnic_L1_full/sign.c
+  #liboqs/src/sig/picnic/external/picnic_L1_UR/api.h
+  #liboqs/src/sig/picnic/external/picnic_L1_UR/sign.c
+  #liboqs/src/sig/picnic/external/picnic_L3_FS/api.h
+  #liboqs/src/sig/picnic/external/picnic_L3_FS/sign.c
+  #liboqs/src/sig/picnic/external/picnic_L3_full/api.h
+  #liboqs/src/sig/picnic/external/picnic_L3_full/sign.c
+  #liboqs/src/sig/picnic/external/picnic_L3_UR/api.h
+  #liboqs/src/sig/picnic/external/picnic_L3_UR/sign.c
+  #liboqs/src/sig/picnic/external/picnic_L5_FS/api.h
+  #liboqs/src/sig/picnic/external/picnic_L5_FS/sign.c
+  #liboqs/src/sig/picnic/external/picnic_L5_full/api.h
+  #liboqs/src/sig/picnic/external/picnic_L5_full/sign.c
+  #liboqs/src/sig/picnic/external/picnic_L5_UR/api.h
+  #liboqs/src/sig/picnic/external/picnic_L5_UR/sign.c
+  liboqs/src/sig/picnic/external/sha3/align.h
+  liboqs/src/sig/picnic/external/sha3/brg_endian.h
+  liboqs/src/sig/picnic/external/sha3/config.h
+  liboqs/src/sig/picnic/external/sha3/KeccakHash.h
+  liboqs/src/sig/picnic/external/sha3/KeccakHashtimes4.h
+  liboqs/src/sig/picnic/external/sha3/KeccakSponge.h
+  liboqs/src/sig/picnic/external/sha3/KeccakSpongetimes4.h
+  liboqs/src/sig/picnic/external/sha3/s390_cpacf.h
+  liboqs/src/sig/picnic/external/sha3/SnP-Relaned.h
+  liboqs/src/sig/picnic/external/sha3/KeccakHash.c
+  liboqs/src/sig/picnic/external/sha3/KeccakHashtimes4.c
+  liboqs/src/sig/picnic/external/sha3/KeccakSponge.c
+  liboqs/src/sig/picnic/external/sha3/KeccakSpongetimes4.c
+  #liboqs/src/sig/picnic/external/sha3/armv8a-neon/KeccakP-1600-SnP.h
+  #liboqs/src/sig/picnic/external/sha3/armv8a-neon/KeccakP-1600-times4-SnP.h
+  #liboqs/src/sig/picnic/external/sha3/armv8a-neon/KeccakP-1600-times4-on1.c
+  #liboqs/src/sig/picnic/external/sha3/avx2/KeccakP-1600-SnP.h
+  #liboqs/src/sig/picnic/external/sha3/avx2/KeccakP-1600-times4-SnP.h
+  #liboqs/src/sig/picnic/external/sha3/avx2/SIMD256-config.h
+  #liboqs/src/sig/picnic/external/sha3/avx2/KeccakP-1600-times4-SIMD256.c
+  liboqs/src/sig/picnic/external/sha3/opt64/KeccakP-1600-opt64-config.h
+  liboqs/src/sig/picnic/external/sha3/opt64/KeccakP-1600-SnP.h
+  liboqs/src/sig/picnic/external/sha3/opt64/KeccakP-1600-times4-SnP.h
+  liboqs/src/sig/picnic/external/sha3/opt64/KeccakP-1600-opt64.c
+  liboqs/src/sig/picnic/external/sha3/opt64/KeccakP-1600-times4-on1.c
+
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QuantumSafePkg/QuantumSafePkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D__UEFI__ -DOPENSSL_SYS_UEFI -U_WIN32 -U_WIN64
+  *_*_*_CC_FLAGS = -DWITH_UNRUH -DWITH_ZKBPP -DWITH_KKW
+  *_*_*_CC_FLAGS = -DWITH_LOWMC_128_128_20 -DWITH_LOWMC_192_192_30 -DWITH_LOWMC_256_256_38 -DWITH_LOWMC_129_129_4 -DWITH_LOWMC_192_192_4 -DWITH_LOWMC_255_255_4
+  # warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  # warning C4101: 'outlen': unreferenced local variable
+  # warning C4189: 'ks': local variable is initialized but not referenced
+  # warning C4244: 'function': conversion from 'uint64_t' to 'uint8_t', possible loss of data
+  # warning C4146: unary minus operator applied to unsigned type, result still unsigned
+  # warning C4221: nonstandard extension used: 'ptr': cannot be initialized using address of automatic variable 'x_le'
+  # warning C4204: nonstandard extension used: non-constant aggregate initializer
+  # warning C4334: '<<': result of 32-bit shift implicitly converted to 64 bits (was 64-bit shift intended?)
+  # warning C4245: 'return': conversion from 'int' to 'std::size_t', signed/unsigned mismatch
+  # warning C4013: 'oqs_sig_picnic_bitstream_put_bits' undefined; assuming extern returning int
+  MSFT:*_*_*_CC_FLAGS = /wd4267 /wd4101 /wd4189 /wd4244 /wd4146 /wd4221 /wd4204 /wd4334 /wd4245 /wd4013 -U_MSC_VER

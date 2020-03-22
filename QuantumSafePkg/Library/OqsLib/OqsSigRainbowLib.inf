@@ -1,0 +1,259 @@
+## @file
+#  library for the liboqs.
+#
+#  Copyright (c) 2020, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = OqsSigRainbowLib
+  FILE_GUID                      = 0752ED7F-439C-41DB-A1D3-480F5BF96F3E
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = OqsSigRainbowLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  liboqs/src/oqs.h
+  liboqs/src/common/common.h
+  liboqs/src/common/pqclean_shims/aes.h
+  liboqs/src/common/pqclean_shims/fips202.h
+  liboqs/src/common/pqclean_shims/randombytes.h
+  liboqs/src/common/pqclean_shims/sha2.h
+  liboqs/src/common/pqclean_shims/sp800-185.h
+  liboqs/src/sig/sig.h
+  liboqs/src/sig/rainbow/sig_rainbow.h
+  liboqs/src/sig/rainbow/sig_rainbow_III_circumzenithal.c
+  liboqs/src/sig/rainbow/sig_rainbow_III_classic.c
+  liboqs/src/sig/rainbow/sig_rainbow_III_compressed.c
+  liboqs/src/sig/rainbow/sig_rainbow_I_circumzenithal.c
+  liboqs/src/sig/rainbow/sig_rainbow_I_classic.c
+  liboqs/src/sig/rainbow/sig_rainbow_I_compressed.c
+  liboqs/src/sig/rainbow/sig_rainbow_V_circumzenithal.c
+  liboqs/src/sig/rainbow/sig_rainbow_V_classic.c
+  liboqs/src/sig/rainbow/sig_rainbow_V_compressed.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/api.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/blas.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/blas_comm.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/gf.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/parallel_matrix_op.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/rainbow.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/rainbow_blas.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/rainbow_config.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/rainbow_keypair.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/rainbow_keypair_computation.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/utils_hash.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/utils_prng.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/blas.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/blas_comm.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/gf.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/parallel_matrix_op.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/rainbow.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/rainbow_keypair.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/rainbow_keypair_computation.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/sign.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/utils_hash.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-circumzenithal_clean/utils_prng.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/api.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/blas.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/blas_comm.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/gf.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/parallel_matrix_op.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/rainbow.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/rainbow_blas.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/rainbow_config.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/rainbow_keypair.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/rainbow_keypair_computation.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/utils_hash.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/utils_prng.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/blas.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/blas_comm.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/gf.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/parallel_matrix_op.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/rainbow.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/rainbow_keypair.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/rainbow_keypair_computation.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/sign.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/utils_hash.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-classic_clean/utils_prng.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/api.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/blas.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/blas_comm.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/gf.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/parallel_matrix_op.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/rainbow.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/rainbow_blas.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/rainbow_config.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/rainbow_keypair.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/rainbow_keypair_computation.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/utils_hash.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/utils_prng.h
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/blas.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/blas_comm.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/gf.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/parallel_matrix_op.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/rainbow.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/rainbow_keypair.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/rainbow_keypair_computation.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/sign.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/utils_hash.c
+  liboqs/src/sig/rainbow/pqclean_rainbowI-compressed_clean/utils_prng.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/api.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/blas.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/blas_comm.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/gf.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/parallel_matrix_op.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/rainbow.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/rainbow_blas.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/rainbow_config.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/rainbow_keypair.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/rainbow_keypair_computation.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/utils_hash.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/utils_prng.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/blas.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/blas_comm.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/gf.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/parallel_matrix_op.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/rainbow.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/rainbow_keypair.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/rainbow_keypair_computation.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/sign.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/utils_hash.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-circumzenithal_clean/utils_prng.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/api.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/blas.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/blas_comm.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/gf.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/parallel_matrix_op.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/rainbow.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/rainbow_blas.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/rainbow_config.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/rainbow_keypair.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/rainbow_keypair_computation.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/utils_hash.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/utils_prng.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/blas.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/blas_comm.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/gf.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/parallel_matrix_op.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/rainbow.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/rainbow_keypair.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/rainbow_keypair_computation.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/sign.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/utils_hash.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-classic_clean/utils_prng.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/api.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/blas.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/blas_comm.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/gf.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/parallel_matrix_op.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/rainbow.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/rainbow_blas.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/rainbow_config.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/rainbow_keypair.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/rainbow_keypair_computation.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/utils_hash.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/utils_prng.h
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/blas.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/blas_comm.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/gf.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/parallel_matrix_op.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/rainbow.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/rainbow_keypair.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/rainbow_keypair_computation.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/sign.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/utils_hash.c
+  liboqs/src/sig/rainbow/pqclean_rainbowIII-compressed_clean/utils_prng.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/api.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/blas.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/blas_comm.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/gf.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/parallel_matrix_op.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/rainbow.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/rainbow_blas.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/rainbow_config.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/rainbow_keypair.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/rainbow_keypair_computation.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/utils_hash.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/utils_prng.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/blas.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/blas_comm.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/gf.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/parallel_matrix_op.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/rainbow.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/rainbow_keypair.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/rainbow_keypair_computation.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/sign.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/utils_hash.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-circumzenithal_clean/utils_prng.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/api.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/blas.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/blas_comm.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/gf.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/parallel_matrix_op.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/rainbow.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/rainbow_blas.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/rainbow_config.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/rainbow_keypair.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/rainbow_keypair_computation.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/utils_hash.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/utils_prng.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/blas.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/blas_comm.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/gf.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/parallel_matrix_op.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/rainbow.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/rainbow_keypair.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/rainbow_keypair_computation.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/sign.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/utils_hash.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-classic_clean/utils_prng.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/api.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/blas.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/blas_comm.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/gf.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/parallel_matrix_op.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/rainbow.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/rainbow_blas.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/rainbow_config.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/rainbow_keypair.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/rainbow_keypair_computation.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/utils_hash.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/utils_prng.h
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/blas.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/blas_comm.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/gf.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/parallel_matrix_op.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/rainbow.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/rainbow_keypair.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/rainbow_keypair_computation.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/sign.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/utils_hash.c
+  liboqs/src/sig/rainbow/pqclean_rainbowV-compressed_clean/utils_prng.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QuantumSafePkg/QuantumSafePkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D__UEFI__ -DOPENSSL_SYS_UEFI -U_WIN32 -U_WIN64
+  # warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  # warning C4101: 'outlen': unreferenced local variable
+  # warning C4189: 'ks': local variable is initialized but not referenced
+  # warning C4146: unary minus operator applied to unsigned type, result still unsigned
+  MSFT:*_*_*_CC_FLAGS = /wd4267 /wd4101 /wd4189 /wd4146 /GL- /Gs4194304

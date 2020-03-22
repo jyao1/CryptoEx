@@ -1,0 +1,47 @@
+## @file
+#  Test for the liboqs.
+#
+#  Copyright (c) 2020, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = OqsKatSig
+  FILE_GUID                      = 3DCDA0F0-BFFF-40A9-B289-97C00EF433E1
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = TestEntryMain
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  liboqs/tests/kat_sig.c
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  QuantumSafePkg/QuantumSafePkg.dec
+
+[LibraryClasses]
+  UefiApplicationEntryPoint
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  OqsLib
+  TestStubLib
+
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D__UEFI__
+  # warning C4244: '=': conversion from 'const uint32_t' to 'uint8_t', possible loss of data
+  # warning C4267: '=': conversion from 'size_t' to 'uint8_t', possible loss of data
+  # warning C4204: nonstandard extension used: non-constant aggregate initializer
+  MSFT:*_*_*_CC_FLAGS = /wd4244 /wd4267 /wd4204
+  

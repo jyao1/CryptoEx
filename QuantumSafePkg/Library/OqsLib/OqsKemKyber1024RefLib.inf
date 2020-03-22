@@ -1,0 +1,75 @@
+## @file
+#  library for the liboqs.
+#
+#  Copyright (c) 2020, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = OqsKemKyber1024RefLib
+  FILE_GUID                      = E1D3D87F-9B5D-4C56-8851-BAD61C03690E
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = OqsKemKyber1024RefLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  liboqs/src/oqs.h
+  liboqs/src/common/common.h
+  liboqs/src/common/pqclean_shims/aes.h
+  liboqs/src/common/pqclean_shims/fips202.h
+  liboqs/src/common/pqclean_shims/randombytes.h
+  liboqs/src/common/pqclean_shims/sha2.h
+  liboqs/src/common/pqclean_shims/sp800-185.h
+  liboqs/src/kem/kem.h
+  liboqs/src/kem/kyber/kem_kyber.h
+  liboqs/src/kem/kyber/pqcrystals-kyber_kyber1024_ref/api.h
+  liboqs/src/kem/kyber/pqcrystals-kyber_kyber1024_ref/cbd.h
+  liboqs/src/kem/kyber/pqcrystals-kyber_kyber1024_ref/fips202.h
+  liboqs/src/kem/kyber/pqcrystals-kyber_kyber1024_ref/indcpa.h
+  liboqs/src/kem/kyber/pqcrystals-kyber_kyber1024_ref/kem.h
+  liboqs/src/kem/kyber/pqcrystals-kyber_kyber1024_ref/ntt.h
+  liboqs/src/kem/kyber/pqcrystals-kyber_kyber1024_ref/params.h
+  liboqs/src/kem/kyber/pqcrystals-kyber_kyber1024_ref/poly.h
+  liboqs/src/kem/kyber/pqcrystals-kyber_kyber1024_ref/polyvec.h
+  liboqs/src/kem/kyber/pqcrystals-kyber_kyber1024_ref/reduce.h
+  liboqs/src/kem/kyber/pqcrystals-kyber_kyber1024_ref/symmetric.h
+  liboqs/src/kem/kyber/pqcrystals-kyber_kyber1024_ref/verify.h
+  liboqs/src/kem/kyber/pqcrystals-kyber_kyber1024_ref/cbd.c
+  liboqs/src/kem/kyber/pqcrystals-kyber_kyber1024_ref/indcpa.c
+  liboqs/src/kem/kyber/pqcrystals-kyber_kyber1024_ref/kem.c
+  liboqs/src/kem/kyber/pqcrystals-kyber_kyber1024_ref/ntt.c
+  liboqs/src/kem/kyber/pqcrystals-kyber_kyber1024_ref/poly.c
+  liboqs/src/kem/kyber/pqcrystals-kyber_kyber1024_ref/polyvec.c
+  liboqs/src/kem/kyber/pqcrystals-kyber_kyber1024_ref/reduce.c
+  liboqs/src/kem/kyber/pqcrystals-kyber_kyber1024_ref/symmetric-shake.c
+  liboqs/src/kem/kyber/pqcrystals-kyber_kyber1024_ref/verify.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QuantumSafePkg/QuantumSafePkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  
+[BuildOptions]
+  *_*_*_CC_FLAGS = -DKYBER_K=4
+  *_*_*_CC_FLAGS = -D__UEFI__ -DOPENSSL_SYS_UEFI -U_WIN32 -U_WIN64
+  # warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  # warning C4101: 'outlen': unreferenced local variable
+  # warning C4189: 'ks': local variable is initialized but not referenced
+  # warning C4146: unary minus operator applied to unsigned type, result still unsigned
+  # warning C4244: '=': conversion from 'uint64_t' to 'uint8_t', possible loss of data
+  MSFT:*_*_*_CC_FLAGS = /wd4267 /wd4101 /wd4189 /wd4146 /wd4244

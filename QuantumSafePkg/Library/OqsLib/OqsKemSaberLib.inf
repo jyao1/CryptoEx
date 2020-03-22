@@ -1,0 +1,142 @@
+## @file
+#  library for the liboqs.
+#
+#  Copyright (c) 2020, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = OqsKemSaberLib
+  FILE_GUID                      = 1AA65FCB-90F4-4646-884C-EBD58F5E9B30
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = OqsKemSaberLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  liboqs/src/oqs.h
+  liboqs/src/common/common.h
+  liboqs/src/common/pqclean_shims/aes.h
+  liboqs/src/common/pqclean_shims/fips202.h
+  liboqs/src/common/pqclean_shims/randombytes.h
+  liboqs/src/common/pqclean_shims/sha2.h
+  liboqs/src/common/pqclean_shims/sp800-185.h
+  liboqs/src/kem/kem.h
+  liboqs/src/kem/saber/kem_saber.h
+  liboqs/src/kem/saber/kem_saber_firesaber.c
+  liboqs/src/kem/saber/kem_saber_lightsaber.c
+  liboqs/src/kem/saber/kem_saber_saber.c
+  #liboqs/src/kem/saber/pqclean_firesaber_avx2/api.h
+  #liboqs/src/kem/saber/pqclean_firesaber_avx2/cbd.h
+  #liboqs/src/kem/saber/pqclean_firesaber_avx2/pack_unpack.h
+  #liboqs/src/kem/saber/pqclean_firesaber_avx2/poly.h
+  #liboqs/src/kem/saber/pqclean_firesaber_avx2/SABER_indcpa.h
+  #liboqs/src/kem/saber/pqclean_firesaber_avx2/SABER_params.h
+  #liboqs/src/kem/saber/pqclean_firesaber_avx2/verify.h
+  #liboqs/src/kem/saber/pqclean_firesaber_avx2/cbd.c
+  #liboqs/src/kem/saber/pqclean_firesaber_avx2/kem.c
+  #liboqs/src/kem/saber/pqclean_firesaber_avx2/pack_unpack.c
+  #liboqs/src/kem/saber/pqclean_firesaber_avx2/poly.c
+  #liboqs/src/kem/saber/pqclean_firesaber_avx2/poly_mul.c
+  #liboqs/src/kem/saber/pqclean_firesaber_avx2/SABER_indcpa.c
+  #liboqs/src/kem/saber/pqclean_firesaber_avx2/verify.c
+  liboqs/src/kem/saber/pqclean_firesaber_clean/api.h
+  liboqs/src/kem/saber/pqclean_firesaber_clean/cbd.h
+  liboqs/src/kem/saber/pqclean_firesaber_clean/pack_unpack.h
+  liboqs/src/kem/saber/pqclean_firesaber_clean/poly.h
+  liboqs/src/kem/saber/pqclean_firesaber_clean/poly_mul.h
+  liboqs/src/kem/saber/pqclean_firesaber_clean/SABER_indcpa.h
+  liboqs/src/kem/saber/pqclean_firesaber_clean/SABER_params.h
+  liboqs/src/kem/saber/pqclean_firesaber_clean/verify.h
+  liboqs/src/kem/saber/pqclean_firesaber_clean/cbd.c
+  liboqs/src/kem/saber/pqclean_firesaber_clean/kem.c
+  liboqs/src/kem/saber/pqclean_firesaber_clean/pack_unpack.c
+  liboqs/src/kem/saber/pqclean_firesaber_clean/poly.c
+  liboqs/src/kem/saber/pqclean_firesaber_clean/poly_mul.c
+  liboqs/src/kem/saber/pqclean_firesaber_clean/SABER_indcpa.c
+  liboqs/src/kem/saber/pqclean_firesaber_clean/verify.c
+  #liboqs/src/kem/saber/pqclean_lightsaber_avx2/api.h
+  #liboqs/src/kem/saber/pqclean_lightsaber_avx2/cbd.h
+  #liboqs/src/kem/saber/pqclean_lightsaber_avx2/pack_unpack.h
+  #liboqs/src/kem/saber/pqclean_lightsaber_avx2/poly.h
+  #liboqs/src/kem/saber/pqclean_lightsaber_avx2/SABER_indcpa.h
+  #liboqs/src/kem/saber/pqclean_lightsaber_avx2/SABER_params.h
+  #liboqs/src/kem/saber/pqclean_lightsaber_avx2/verify.h
+  #liboqs/src/kem/saber/pqclean_lightsaber_avx2/cbd.c
+  #liboqs/src/kem/saber/pqclean_lightsaber_avx2/kem.c
+  #liboqs/src/kem/saber/pqclean_lightsaber_avx2/pack_unpack.c
+  #liboqs/src/kem/saber/pqclean_lightsaber_avx2/poly.c
+  #liboqs/src/kem/saber/pqclean_lightsaber_avx2/poly_mul.c
+  #liboqs/src/kem/saber/pqclean_lightsaber_avx2/SABER_indcpa.c
+  #liboqs/src/kem/saber/pqclean_lightsaber_avx2/verify.c
+  liboqs/src/kem/saber/pqclean_lightsaber_clean/api.h
+  liboqs/src/kem/saber/pqclean_lightsaber_clean/cbd.h
+  liboqs/src/kem/saber/pqclean_lightsaber_clean/pack_unpack.h
+  liboqs/src/kem/saber/pqclean_lightsaber_clean/poly.h
+  liboqs/src/kem/saber/pqclean_lightsaber_clean/poly_mul.h
+  liboqs/src/kem/saber/pqclean_lightsaber_clean/SABER_indcpa.h
+  liboqs/src/kem/saber/pqclean_lightsaber_clean/SABER_params.h
+  liboqs/src/kem/saber/pqclean_lightsaber_clean/verify.h
+  liboqs/src/kem/saber/pqclean_lightsaber_clean/cbd.c
+  liboqs/src/kem/saber/pqclean_lightsaber_clean/kem.c
+  liboqs/src/kem/saber/pqclean_lightsaber_clean/pack_unpack.c
+  liboqs/src/kem/saber/pqclean_lightsaber_clean/poly.c
+  liboqs/src/kem/saber/pqclean_lightsaber_clean/poly_mul.c
+  liboqs/src/kem/saber/pqclean_lightsaber_clean/SABER_indcpa.c
+  liboqs/src/kem/saber/pqclean_lightsaber_clean/verify.c
+  #liboqs/src/kem/saber/pqclean_saber_avx2/api.h
+  #liboqs/src/kem/saber/pqclean_saber_avx2/cbd.h
+  #liboqs/src/kem/saber/pqclean_saber_avx2/pack_unpack.h
+  #liboqs/src/kem/saber/pqclean_saber_avx2/poly.h
+  #liboqs/src/kem/saber/pqclean_saber_avx2/SABER_indcpa.h
+  #liboqs/src/kem/saber/pqclean_saber_avx2/SABER_params.h
+  #liboqs/src/kem/saber/pqclean_saber_avx2/verify.h
+  #liboqs/src/kem/saber/pqclean_saber_avx2/cbd.c
+  #liboqs/src/kem/saber/pqclean_saber_avx2/kem.c
+  #liboqs/src/kem/saber/pqclean_saber_avx2/pack_unpack.c
+  #liboqs/src/kem/saber/pqclean_saber_avx2/poly.c
+  #liboqs/src/kem/saber/pqclean_saber_avx2/poly_mul.c
+  #liboqs/src/kem/saber/pqclean_saber_avx2/SABER_indcpa.c
+  #liboqs/src/kem/saber/pqclean_saber_avx2/verify.c
+  liboqs/src/kem/saber/pqclean_saber_clean/api.h
+  liboqs/src/kem/saber/pqclean_saber_clean/cbd.h
+  liboqs/src/kem/saber/pqclean_saber_clean/pack_unpack.h
+  liboqs/src/kem/saber/pqclean_saber_clean/poly.h
+  liboqs/src/kem/saber/pqclean_saber_clean/poly_mul.h
+  liboqs/src/kem/saber/pqclean_saber_clean/SABER_indcpa.h
+  liboqs/src/kem/saber/pqclean_saber_clean/SABER_params.h
+  liboqs/src/kem/saber/pqclean_saber_clean/verify.h
+  liboqs/src/kem/saber/pqclean_saber_clean/cbd.c
+  liboqs/src/kem/saber/pqclean_saber_clean/kem.c
+  liboqs/src/kem/saber/pqclean_saber_clean/pack_unpack.c
+  liboqs/src/kem/saber/pqclean_saber_clean/poly.c
+  liboqs/src/kem/saber/pqclean_saber_clean/poly_mul.c
+  liboqs/src/kem/saber/pqclean_saber_clean/SABER_indcpa.c
+  liboqs/src/kem/saber/pqclean_saber_clean/verify.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QuantumSafePkg/QuantumSafePkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D__UEFI__ -DOPENSSL_SYS_UEFI -U_WIN32 -U_WIN64
+  # warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  # warning C4101: 'outlen': unreferenced local variable
+  # warning C4189: 'ks': local variable is initialized but not referenced
+  # warning C4028: formal parameter 4 different from declaration
+  MSFT:*_*_*_CC_FLAGS = /wd4267 /wd4101 /wd4189 /wd4028

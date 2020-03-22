@@ -1,0 +1,33 @@
+## @file
+# This package provides EDKII QuantumSafe related support.
+#
+# Copyright (c) 2020, Intel Corporation. All rights reserved.<BR>
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = QuantumSafePkg
+  PACKAGE_GUID                   = CFFFDFA8-72AC-4156-8959-540CF6D501BC
+  PACKAGE_VERSION                = 0.1
+
+[Includes]
+  Include
+
+  #BUGBUG: Expose for other QuantumSafe*Pkg only.
+  #The reason is separate IP for furthur investigation.
+  #Below lines should be moved to Private after we merge all QuantumSafe*Pkg to QuantumSafePkg
+  Include/CrtSupportInclude
+  Include/OpensslInclude
+
+[Includes.Common.Private]
+  Library/Include
+
+[LibraryClasses]
+
+[Guids]
+
+[Protocols]
+
+[PcdsFixedAtBuild, PcdsPatchableInModule]

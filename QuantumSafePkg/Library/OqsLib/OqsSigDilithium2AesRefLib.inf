@@ -1,0 +1,76 @@
+## @file
+#  library for the liboqs.
+#
+#  Copyright (c) 2020, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = OqsSigDilithium2AesRefLib
+  FILE_GUID                      = E20694C8-5B3E-4C84-8B96-424C4216BCB1
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = OqsSigDilithium2AesRefLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  liboqs/src/oqs.h
+  liboqs/src/common/common.h
+  liboqs/src/common/pqclean_shims/aes.h
+  liboqs/src/common/pqclean_shims/fips202.h
+  liboqs/src/common/pqclean_shims/randombytes.h
+  liboqs/src/common/pqclean_shims/sha2.h
+  liboqs/src/common/pqclean_shims/sp800-185.h
+  liboqs/src/sig/sig.h
+  liboqs/src/sig/dilithium/sig_dilithium.h
+  liboqs/src/sig/dilithium/pqcrystals-dilithium_dilithium2-aes_ref/aes256ctr.h
+  liboqs/src/sig/dilithium/pqcrystals-dilithium_dilithium2-aes_ref/api.h
+  liboqs/src/sig/dilithium/pqcrystals-dilithium_dilithium2-aes_ref/config.h
+  liboqs/src/sig/dilithium/pqcrystals-dilithium_dilithium2-aes_ref/fips202.h
+  liboqs/src/sig/dilithium/pqcrystals-dilithium_dilithium2-aes_ref/ntt.h
+  liboqs/src/sig/dilithium/pqcrystals-dilithium_dilithium2-aes_ref/packing.h
+  liboqs/src/sig/dilithium/pqcrystals-dilithium_dilithium2-aes_ref/params.h
+  liboqs/src/sig/dilithium/pqcrystals-dilithium_dilithium2-aes_ref/poly.h
+  liboqs/src/sig/dilithium/pqcrystals-dilithium_dilithium2-aes_ref/polyvec.h
+  liboqs/src/sig/dilithium/pqcrystals-dilithium_dilithium2-aes_ref/reduce.h
+  liboqs/src/sig/dilithium/pqcrystals-dilithium_dilithium2-aes_ref/rounding.h
+  liboqs/src/sig/dilithium/pqcrystals-dilithium_dilithium2-aes_ref/sign.h
+  liboqs/src/sig/dilithium/pqcrystals-dilithium_dilithium2-aes_ref/symmetric.h
+  liboqs/src/sig/dilithium/pqcrystals-dilithium_dilithium2-aes_ref/ntt.c
+  liboqs/src/sig/dilithium/pqcrystals-dilithium_dilithium2-aes_ref/packing.c
+  liboqs/src/sig/dilithium/pqcrystals-dilithium_dilithium2-aes_ref/poly.c
+  liboqs/src/sig/dilithium/pqcrystals-dilithium_dilithium2-aes_ref/polyvec.c
+  liboqs/src/sig/dilithium/pqcrystals-dilithium_dilithium2-aes_ref/reduce.c
+  liboqs/src/sig/dilithium/pqcrystals-dilithium_dilithium2-aes_ref/rounding.c
+  liboqs/src/sig/dilithium/pqcrystals-dilithium_dilithium2-aes_ref/sign.c
+  liboqs/src/sig/dilithium/pqcrystals-dilithium_dilithium2-aes_ref/symmetric-aes.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QuantumSafePkg/QuantumSafePkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  
+[BuildOptions]
+  *_*_*_CC_FLAGS = -DDILITHIUM_MODE=2 -DDILITHIUM_USE_AES
+  *_*_*_CC_FLAGS = -D__UEFI__ -DOPENSSL_SYS_UEFI -U_WIN32 -U_WIN64
+  # warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  # warning C4101: 'outlen': unreferenced local variable
+  # warning C4189: 'ks': local variable is initialized but not referenced
+  # warning C4244: '=': conversion from 'uint64_t' to 'uint8_t', possible loss of data
+  # warning C4245: '=': conversion from 'int' to 'std::size_t', signed/unsigned mismatch
+  # Add BaseLib.h to avoid the issue with "#define L"
+  MSFT:*_*_*_CC_FLAGS = /wd4267 /wd4101 /wd4189 /wd4244 /wd4245 /FILibrary\BaseLib.h /GL- /Gs1048576
