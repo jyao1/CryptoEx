@@ -1,0 +1,63 @@
+## @file
+#  Test for the hash-sigs.
+#
+#  Copyright (c) 2020, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = LmsTest
+  FILE_GUID                      = 3DCDA0F0-BFFF-40A9-B289-97C00EF433E1
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = TestEntryMain
+  
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  hash-sigs/test_h25.c
+  hash-sigs/test_hss.c
+  hash-sigs/test_keygen.c
+  hash-sigs/test_keyload.c
+  hash-sigs/test_load.c
+  hash-sigs/test_reserve.c
+  hash-sigs/test_sign.c
+  hash-sigs/test_sign_inc.c
+  hash-sigs/test_stat.c
+  hash-sigs/test_testvector.c
+  hash-sigs/test_thread.c
+  hash-sigs/test_verify.c
+  hash-sigs/test_verify_inc.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QuantumSafePkg/QuantumSafePkg.dec
+
+[LibraryClasses]
+  UefiApplicationEntryPoint
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  LmsLib
+  TestStubLib
+
+[BuildOptions]
+  # warning C4018: '<': signed/unsigned mismatch
+  # warning C4267: '=': conversion from 'size_t' to 'long', possible loss of data
+  # warning C4295: 'message': array is too small to include a terminating null character
+  # warning C4389: '==': signed/unsigned mismatch
+  # warning C4244: '=': conversion from 'unsigned __int64' to 'param_set_t', possible loss of data
+  # warning C4245: 'function': conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+  # warning C4456: declaration of 'subtree_size' hides previous local declaration
+  # warning C4457: declaration of 'w' hides function parameter
+  MSFT:*_*_*_CC_FLAGS = /wd4267 /wd4018 /wd4456 /wd4389 /wd4244 /wd4245 /wd4457 /wd4295 /GL- /Gs1048576
+  

@@ -1,0 +1,72 @@
+## @file
+#  library for the hash-sigs.
+#
+#  Copyright (c) 2020, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = LmsLib
+  FILE_GUID                      = E836DAF9-7D3E-4B68-96B3-A39DED31B3A8
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = LmsLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  hash-sigs/endian.c
+  hash-sigs/hash.c
+  hash-sigs/hss.c
+  hash-sigs/hss_alloc.c
+  hash-sigs/hss_aux.c
+  hash-sigs/hss_common.c
+  hash-sigs/hss_compute.c
+  hash-sigs/hss_derive.c
+  hash-sigs/hss_generate.c
+  hash-sigs/hss_keygen.c
+  hash-sigs/hss_param.c
+  hash-sigs/hss_reserve.c
+  hash-sigs/hss_sign.c
+  hash-sigs/hss_sign_inc.c
+  #hash-sigs/hss_thread_pthread.c
+  hash-sigs/hss_thread_single.c
+  hash-sigs/hss_verify.c
+  hash-sigs/hss_verify_inc.c
+  hash-sigs/hss_zeroize.c
+  hash-sigs/lm_common.c
+  hash-sigs/lm_ots_common.c
+  hash-sigs/lm_ots_sign.c
+  hash-sigs/lm_ots_verify.c
+  hash-sigs/lm_verify.c
+  hash-sigs/sha256.c
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  QuantumSafePkg/QuantumSafePkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  IntrinsicLib
+  SysCallLib
+  
+[BuildOptions]
+  # warning C4018: '<': signed/unsigned mismatch
+  # warning C4267: '=': conversion from 'size_t' to 'long', possible loss of data
+  # warning C4389: '==': signed/unsigned mismatch
+  # warning C4244: '=': conversion from 'unsigned __int64' to 'param_set_t', possible loss of data
+  # warning C4245: 'function': conversion from 'int' to 'unsigned int', signed/unsigned mismatch
+  # warning C4456: declaration of 'subtree_size' hides previous local declaration
+  # warning C4457: declaration of 'w' hides function parameter
+  MSFT:*_*_*_CC_FLAGS = /wd4267 /wd4018 /wd4456 /wd4389 /wd4244 /wd4245 /wd4457
