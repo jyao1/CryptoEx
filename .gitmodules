@@ -1,3 +1,6 @@
 [submodule "QuantumSafePkg/Library/OqsLib/liboqs"]
 	path = QuantumSafePkg/Library/OqsLib/liboqs
 	url = https://github.com/jyao1/liboqs
+[submodule "QuantumSafeLmsPkg/Library/LmsLib/hash-sigs"]
+	path = QuantumSafeLmsPkg/Library/LmsLib/hash-sigs
+	url = https://github.com/jyao1/hash-sigs
