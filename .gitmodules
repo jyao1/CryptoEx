@@ -1,0 +1,3 @@
+[submodule "QuantumSafePkg/Library/OqsLib/liboqs"]
+	path = QuantumSafePkg/Library/OqsLib/liboqs
+	url = https://github.com/jyao1/liboqs
