@@ -1,0 +1,25 @@
+## @file
+# This package provides EDKII QuantumSafe related support.
+#
+# Copyright (c) 2020, Intel Corporation. All rights reserved.<BR>
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = QuantumSafeXmssRefPkg
+  PACKAGE_GUID                   = 6D3A2837-B594-459A-8C72-33BB3D98D056
+  PACKAGE_VERSION                = 0.1
+
+[Includes]
+
+[Includes.Common.Private]
+
+[LibraryClasses]
+
+[Guids]
+
+[Protocols]
+
+[PcdsFixedAtBuild, PcdsPatchableInModule]

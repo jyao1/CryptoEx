@@ -1,0 +1,62 @@
+## @file
+#  library for the xmss-reference.
+#
+#  Copyright (c) 2020, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = XmssLib
+  FILE_GUID                      = D51C9FB7-FAC5-4427-8A21-85A032868033
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = XmssLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  xmss-reference/fips202.c
+  xmss-reference/hash.c
+  xmss-reference/hash_address.c
+  xmss-reference/params.c
+  xmss-reference/randombytes.c
+  xmss-reference/utils.c
+  xmss-reference/wots.c
+  xmss-reference/xmss.c
+  xmss-reference/xmss_commons.c
+  xmss-reference/xmss_core.c
+  #xmss-reference/xmss_core_fast.c
+  xmss-reference/fips202.h
+  xmss-reference/hash.h
+  xmss-reference/hash_address.h
+  xmss-reference/params.h
+  xmss-reference/randombytes.h
+  xmss-reference/utils.h
+  xmss-reference/wots.h
+  xmss-reference/xmss.h
+  xmss-reference/xmss_commons.h
+  xmss-reference/xmss_core.h
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  QuantumSafePkg/QuantumSafePkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  IntrinsicLib
+  SysCallLib
+  
+[BuildOptions]
+  # warning C4244: '=': conversion from 'unsigned __int64' to 'unsigned int', possible loss of data
+  MSFT:*_*_*_CC_FLAGS = /wd4244

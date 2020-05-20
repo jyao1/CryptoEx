@@ -1,0 +1,44 @@
+## @file
+#  Test for the xmss-reference.
+#
+#  Copyright (c) 2020, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = XmssUiSign
+  FILE_GUID                      = B372C8ED-CB04-4A2B-AF19-5532C9ABF36F
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = TestEntryMain
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  xmss-reference/ui/sign.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QuantumSafePkg/QuantumSafePkg.dec
+
+[LibraryClasses]
+  UefiApplicationEntryPoint
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  IntrinsicLib
+  SysCallLib
+  XmssLib
+  TestStubLib
+
+[BuildOptions]
+  MSFT:*_*_*_CC_FLAGS = /GL- /Gs1048576
