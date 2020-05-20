@@ -4,3 +4,6 @@
 [submodule "QuantumSafeLmsPkg/Library/LmsLib/hash-sigs"]
 	path = QuantumSafeLmsPkg/Library/LmsLib/hash-sigs
 	url = https://github.com/jyao1/hash-sigs
+[submodule "QuantumSafeXmssRefPkg/Library/XmssLib/xmss-reference"]
+	path = QuantumSafeXmssRefPkg/Library/XmssLib/xmss-reference
+	url = https://github.com/jyao1/xmss-reference
