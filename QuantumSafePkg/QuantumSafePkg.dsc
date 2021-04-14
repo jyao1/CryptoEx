@@ -254,6 +254,8 @@
   QuantumSafePkg/Library/OqsLib/OqsKatKem.inf
   QuantumSafePkg/Library/OqsLib/OqsKatSig.inf
 
+  QuantumSafePkg/PqcCryptTest/PqcCryptTest.inf
+
 [BuildOptions]
   *_*_*_CC_FLAGS = -D DISABLE_NEW_DEPRECATED_INTERFACES
   
