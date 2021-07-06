@@ -31,11 +31,19 @@ This repo uses below submodules:
 
   QuantumSafeXmssRefPkg/Library/XmssLib/xmss-reference
 
+  Because key generation takes long time, some default key pair is provided for [LMS](https://github.com/jyao1/CryptoEx/tree/master/QuantumSafeLmsPkg/TestKeys) and [XMSS](https://github.com/jyao1/CryptoEx/tree/master/QuantumSafeXmssRefPkg/TestKeys). Please copy them to running folder.
+
 ## Run:
 
   NOTE: Some crypto algorithm uses large stack. Please enlarge the STACK_SIZE to 8M at least to run all test in [DxeIpl](https://github.com/tianocore/edk2/blob/master/MdeModulePkg/Core/DxeIplPeim/DxeIpl.h).
 
   You may also use [StackUsage](https://github.com/jyao1/EdkiiShellTool/tree/master/EdkiiShellToolPkg/StackUsage) tool to track the stack usage.
+
+  [PQC Stack Heap Usage](https://github.com/jyao1/CryptoEx/blob/master/QuantumSafePkg/PqcCryptTest/StackHeapUsage.c).
+
+  [LMS Stack Heap Usage](https://github.com/jyao1/CryptoEx/blob/master/QuantumSafeLmsPkg/Library/LmsLib/StackHeapUsage.c).
+
+  [XMSS Stack Heap Usage](https://github.com/jyao1/CryptoEx/blob/master/QuantumSafeXmssRefPkg/Library/XmssLib/StackHeapUsage.c).
 
 ## Known limitation:
 This package is only the sample code to show the concept.
