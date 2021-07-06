@@ -49,8 +49,6 @@
 #include <Library/TestStubLib.h>
 #include <Library/MemoryAllocationLib.h>
 
-#define MAX_FILE_NAME_LEN  256
-
    /* When we generate a key, these are the parameters we use (unless the */
    /* user has specified otherwise). For signature generation/verification, */
    /* we use the parameters from the private key (for signature */
@@ -62,7 +60,26 @@
    /* We use Winternitz 8 for both trees; this minimizes the signature size */
    /* This gives us a reasonable genkey time (3 minutes with threading), */
    /* good load times (perhaps 1 second), and a billion signatures per key */
-const char *default_parm_set = "20/8,10/8";
+const char *test_parm_set[] = {
+    "5_8",
+    "10_8",
+    "15_8",
+    "10_8,10_8",
+    "15_8,10_8",
+    "15_8,15_8",
+};
+
+void
+MemoryUsageCheckBegin (
+  char   *Name
+  );
+
+void
+MemoryUsageCheckEnd (
+  char   *Name
+  );
+
+#define MAX_FILE_NAME_LEN  256
 
 #define DEFAULT_AUX_DATA 10916   /* Use 10+k of aux data (which works well */
                             /* with the above default parameter set) */
@@ -258,7 +275,7 @@ static int keygen(const char *keyname, const char *parm_set) {
     param_set_t lm_array[ MAX_HSS_LEVELS ];
     param_set_t ots_array[ MAX_HSS_LEVELS ];
     size_t aux_size;
-    if (!parm_set) parm_set = default_parm_set;
+    if (!parm_set) return 0;
     if (!parse_parm_set( &levels, lm_array, ots_array, &aux_size, parm_set)) {
         return 0;
     }
@@ -759,7 +776,7 @@ static int parse_parm_set( int *levels, param_set_t *lm_array,
         }
         /* Now see if we can get the Winternitz parameter */
         param_set_t ots = LMOTS_SHA256_N32_W8;
-        if (*parm_set == '/') {
+        if (*parm_set == '_') {
             parm_set++;
             int w = get_integer( &parm_set );
             switch (w) {
@@ -831,7 +848,7 @@ static const char *check_prefix( const char *s, const char *prefix ) {
     return s;
 }
 
-int main(int argc, char **argv) {
+int main2(int argc, char **argv) {
     if (argc < 2) {
         usage(argv[0]);
         return 0;
@@ -923,3 +940,53 @@ int main(int argc, char **argv) {
     return 0;
 }
 
+
+VOID
+ValidateLmsVerify (
+    VOID
+    )
+{
+    int i;
+    const char *keyname = 0;
+    const char *parmname = 0;
+    char *msgfiles_name[2] = {"hello.bin", NULL};
+    unsigned char msg_buffer[] = {"hello, world!"};
+
+    WriteFileFromBuffer (L"hello.bin", sizeof(msg_buffer), msg_buffer);
+
+    for (i = 0; i < ARRAY_SIZE(test_parm_set); i++) {
+        parmname = test_parm_set[i];
+        keyname = test_parm_set[i];
+        printf ("test - %s\n", parmname);
+#ifdef NEED_GEN_KEY
+        if (!keygen(keyname, parmname)) {
+            printf( "Error creating keys\n" );
+            break;
+        }
+#endif
+        if (!sign( keyname, msgfiles_name )) {
+            printf( "Error signing\n" );
+            break;
+        }
+        MemoryUsageCheckBegin ((char *)parmname);
+        if (!verify( keyname, msgfiles_name )) {
+            printf( "Error verifying\n" );
+            MemoryUsageCheckEnd ((char *)parmname);
+            break;
+        }
+        MemoryUsageCheckEnd ((char *)parmname);
+    }
+
+    printf ("test done!\n");
+}
+
+int main(int argc, char **argv)
+{
+  printf ("\nUEFI-LMS Wrapper Cryptosystem Testing: \n");
+  printf ("-------------------------------------------- \n");
+
+  printf ("UEFI-LMS Verification: \n");
+  ValidateLmsVerify ();
+
+  return EFI_SUCCESS;
+}

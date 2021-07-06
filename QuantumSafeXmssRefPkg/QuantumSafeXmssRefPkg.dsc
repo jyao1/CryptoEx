@@ -220,6 +220,7 @@
   QuantumSafeXmssRefPkg/Library/XmssLib/XmssUiGenKey.inf
   QuantumSafeXmssRefPkg/Library/XmssLib/XmssUiSign.inf
   QuantumSafeXmssRefPkg/Library/XmssLib/XmssUiVerify.inf
+  QuantumSafeXmssRefPkg/Library/XmssLib/XmssCryptoTest.inf
   
 [BuildOptions]
   *_*_*_CC_FLAGS = -D DISABLE_NEW_DEPRECATED_INTERFACES

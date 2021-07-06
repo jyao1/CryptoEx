@@ -21,7 +21,8 @@
 #
 
 [Sources]
-  xmss-reference/ui/keypair.c
+  xmss-reference/xmss.h
+  keypair.c
 
 [Packages]
   MdePkg/MdePkg.dec

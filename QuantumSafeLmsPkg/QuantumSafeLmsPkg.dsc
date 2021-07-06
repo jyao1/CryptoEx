@@ -212,6 +212,7 @@
   QuantumSafeLmsPkg/Library/LmsLib/LmsLib.inf
   QuantumSafeLmsPkg/Library/LmsLib/LmsTest.inf
   QuantumSafeLmsPkg/Library/LmsLib/LmsDemo.inf
+  QuantumSafeLmsPkg/Library/LmsLib/LmsCryptoTest.inf
   
 [BuildOptions]
   *_*_*_CC_FLAGS = -D DISABLE_NEW_DEPRECATED_INTERFACES

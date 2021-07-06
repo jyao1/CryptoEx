@@ -8,8 +8,8 @@
 
 [Defines]
   INF_VERSION                    = 0x00010005
-  BASE_NAME                      = XmssUiVerify
-  FILE_GUID                      = DE17099D-C1C9-4D5B-A21B-30CA64FBE1E0
+  BASE_NAME                      = XmssCryptoTest
+  FILE_GUID                      = DAD94828-EF9F-44B9-B71A-BC5D93F114BA
   MODULE_TYPE                    = UEFI_APPLICATION
   VERSION_STRING                 = 1.0
   ENTRY_POINT                    = TestEntryMain
@@ -22,7 +22,8 @@
 
 [Sources]
   xmss-reference/xmss.h
-  open.c
+  XmssCryptoTest.c
+  StackHeapUsage.c
 
 [Packages]
   MdePkg/MdePkg.dec
@@ -40,6 +41,10 @@
   SysCallLib
   XmssLib
   TestStubLib
+
+[Guids]
+  gEfiHobMemoryAllocStackGuid                   ## SOMETIMES_PRODUCES ## HOB # MemoryAllocation StackHob
+  gEfiHobListGuid
 
 [BuildOptions]
   MSFT:*_*_*_CC_FLAGS = /GL- /Gs1048576

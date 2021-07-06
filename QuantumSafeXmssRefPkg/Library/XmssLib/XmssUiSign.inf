@@ -21,7 +21,8 @@
 #
 
 [Sources]
-  xmss-reference/ui/sign.c
+  xmss-reference/xmss.h
+  sign.c
 
 [Packages]
   MdePkg/MdePkg.dec
