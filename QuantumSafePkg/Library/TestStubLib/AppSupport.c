@@ -229,15 +229,17 @@ WriteFileFromBuffer (
   //
   // Write the file data from the buffer
   //
-  TempBufferSize = BufferSize;
-  Status = ShellProtocol->WriteFile (
-                            Handle,
-                            &TempBufferSize,
-                            Buffer
-                            );
-  if (EFI_ERROR (Status)) {
-    ShellProtocol->CloseFile (Handle);
-    return Status;
+  if (BufferSize != 0) {
+    TempBufferSize = BufferSize;
+    Status = ShellProtocol->WriteFile (
+                              Handle,
+                              &TempBufferSize,
+                              Buffer
+                              );
+    if (EFI_ERROR (Status)) {
+      ShellProtocol->CloseFile (Handle);
+      return Status;
+    }
   }
 
   ShellProtocol->CloseFile (Handle);
@@ -245,3 +247,177 @@ WriteFileFromBuffer (
   return EFI_SUCCESS;
 }
 
+typedef struct {
+  CHAR16          *FileName;
+  VOID            *FileBuffer;
+  UINTN           FileBufferMaxSize;
+  UINTN           FileBufferSize;
+  UINTN           ReadPosition;
+} FILE_BUFFER;
+
+#define FILE_BUFFER_MAX_SIZE 0x1000
+
+VOID *
+OpenFile (
+  IN CHAR16   *FileName,
+  IN BOOLEAN  IsRead
+  )
+{
+  UINTN          BufferSize;
+  VOID           *Buffer;
+  FILE_BUFFER    *FileBuffer;
+  UINTN          FileNameSize;
+  EFI_STATUS     Status;
+
+  if (IsRead) {
+    Status = ReadFileToBuffer (FileName, &BufferSize, &Buffer);
+  } else {
+    Buffer = NULL;
+    BufferSize = 0;
+    Status = WriteFileFromBuffer (FileName, 0, NULL);
+  }
+  if (EFI_ERROR(Status)) {
+    return NULL;
+  }
+
+  FileBuffer = AllocateZeroPool (sizeof(FILE_BUFFER));
+  if (FileBuffer == NULL) {
+    FreePool (Buffer);
+    return NULL;
+  }
+
+  FileNameSize = StrSize (FileName);
+  FileBuffer->FileName = AllocateZeroPool (FileNameSize);
+  if (FileBuffer->FileName == NULL) {
+    FreePool (Buffer);
+    FreePool (FileBuffer);
+    return NULL;
+  }
+  StrCpyS (FileBuffer->FileName, FileNameSize, FileName);
+  if (BufferSize != 0) {
+    FileBuffer->FileBuffer = Buffer;
+    FileBuffer->FileBufferMaxSize = BufferSize;
+    FileBuffer->FileBufferSize = BufferSize;
+  } else {
+    ASSERT (Buffer == NULL);
+    FileBuffer->FileBuffer = AllocateZeroPool (FILE_BUFFER_MAX_SIZE);
+    if (FileBuffer->FileBuffer == NULL) {
+      FreePool (Buffer);
+      FreePool (FileBuffer);
+      return NULL;
+    }
+    FileBuffer->FileBufferMaxSize = FILE_BUFFER_MAX_SIZE;
+    FileBuffer->FileBufferSize = 0;
+  }
+  FileBuffer->ReadPosition = 0;
+  
+  return FileBuffer;
+}
+
+EFI_STATUS
+CloseFile (
+  IN VOID *File
+  )
+{
+  FILE_BUFFER    *FileBuffer;
+  EFI_STATUS     Status;
+
+  FileBuffer = File;
+
+  Status = WriteFileFromBuffer (FileBuffer->FileName, FileBuffer->FileBufferSize, FileBuffer->FileBuffer);
+
+  return Status;
+}
+
+EFI_STATUS
+WriteFile (
+  IN VOID  *File,
+  IN VOID  *Buffer,
+  IN UINTN BufferSize
+  )
+{
+  FILE_BUFFER    *FileBuffer;
+  UINTN          AddedBufferSize;
+  VOID           *NewFileBuffer;
+
+  FileBuffer = File;
+  ASSERT (FileBuffer->FileBufferMaxSize >= FileBuffer->FileBufferSize);
+
+  if (FileBuffer->FileBufferMaxSize - FileBuffer->FileBufferSize < BufferSize) {
+    AddedBufferSize = (BufferSize > FILE_BUFFER_MAX_SIZE) ? BufferSize : FILE_BUFFER_MAX_SIZE;
+    NewFileBuffer = ReallocatePool (
+                      FileBuffer->FileBufferMaxSize,
+                      FileBuffer->FileBufferMaxSize + AddedBufferSize,
+                      FileBuffer->FileBuffer
+                      );
+    if (NewFileBuffer == NULL) {
+      return EFI_OUT_OF_RESOURCES;
+    }
+    FileBuffer->FileBufferMaxSize += AddedBufferSize;
+    FileBuffer->FileBuffer = NewFileBuffer;
+  }
+
+  CopyMem (
+    (UINT8 *)FileBuffer->FileBuffer + FileBuffer->FileBufferSize,
+    Buffer,
+    BufferSize
+    );
+  FileBuffer->FileBufferSize += BufferSize;
+
+  return EFI_SUCCESS;
+}
+
+EFI_STATUS
+ReadFileLine (
+  IN VOID      *File,
+  IN OUT VOID  *Buffer,
+  IN OUT UINTN *BufferSize
+  )
+{
+  FILE_BUFFER    *FileBuffer;
+  UINTN          NewPosition;
+
+  FileBuffer = File;
+  ASSERT (FileBuffer->ReadPosition <= FileBuffer->FileBufferSize);
+
+  if (*BufferSize == 0) {
+    return EFI_INVALID_PARAMETER;
+  }
+
+  if (FileBuffer->ReadPosition == FileBuffer->FileBufferSize) {
+    *(UINT8 *)Buffer = 0;
+    *BufferSize = 1;
+    return EFI_OUT_OF_RESOURCES;
+  }
+
+  //
+  // ReadPosition is always the (last + 1) byte of current buffer and the first bytes of next buffer.
+  // For this function, (ReadPosition - 1) is '\n' or last byte of file.
+  //
+  for (NewPosition = FileBuffer->ReadPosition; NewPosition < FileBuffer->FileBufferSize; NewPosition++) {
+    if (*((UINT8 *)FileBuffer->FileBuffer + NewPosition) == '\n') {
+      break;
+    }
+  }
+
+  if (NewPosition != FileBuffer->FileBufferSize) {
+    // let NewPosition to be the next char
+    NewPosition ++;
+  }
+
+  if (NewPosition > FileBuffer->ReadPosition + (*BufferSize - 1)) {
+    NewPosition = FileBuffer->ReadPosition + (*BufferSize - 1);
+  }
+  *BufferSize = NewPosition - FileBuffer->ReadPosition + 1;
+
+  CopyMem (
+    Buffer,
+    (UINT8 *)FileBuffer->FileBuffer + FileBuffer->ReadPosition,
+    (*BufferSize - 1)
+    );
+  *((UINT8 *)Buffer + (*BufferSize - 1)) = 0;
+
+  FileBuffer->ReadPosition = NewPosition;
+
+  return EFI_SUCCESS;
+}

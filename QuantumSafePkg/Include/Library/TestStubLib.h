@@ -36,4 +36,29 @@ WriteFileFromBuffer (
   IN  VOID                                 *Buffer
   );
 
+VOID *
+OpenFile (
+  IN CHAR16   *FileName,
+  IN BOOLEAN  IsRead
+  );
+
+EFI_STATUS
+CloseFile (
+  IN VOID *File
+  );
+
+EFI_STATUS
+WriteFile (
+  IN VOID  *File,
+  IN VOID  *Buffer,
+  IN UINTN BufferSize
+  );
+
+EFI_STATUS
+ReadFileLine (
+  IN VOID      *File,
+  IN OUT VOID  *Buffer,
+  IN OUT UINTN *BufferSize
+  );
+
 #endif
