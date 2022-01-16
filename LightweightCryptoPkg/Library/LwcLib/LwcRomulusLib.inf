@@ -1,0 +1,67 @@
+## @file
+#  library for the LWC Romulus.
+#
+#  Copyright (c) 2022, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = LwcRomulusLib
+  FILE_GUID                      = 2178CCE6-8EFC-47EE-A158-B4F7E4741EDF
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = LwcRomulusLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  lwc-finalists/src/combined/romulus-hash.c
+  lwc-finalists/src/combined/romulus-hash.h
+  lwc-finalists/src/combined/romulus-hkdf.c
+  lwc-finalists/src/combined/romulus-hkdf.h
+  lwc-finalists/src/combined/romulus-hmac.c
+  lwc-finalists/src/combined/romulus-hmac.h
+  lwc-finalists/src/combined/romulus-kmac.c
+  lwc-finalists/src/combined/romulus-kmac.h
+  lwc-finalists/src/combined/romulus-m-aead.c
+  lwc-finalists/src/combined/romulus-m-aead.h
+  lwc-finalists/src/combined/romulus-n-aead.c
+  lwc-finalists/src/combined/romulus-n-aead.h
+  lwc-finalists/src/combined/romulus-pbkdf2.c
+  lwc-finalists/src/combined/romulus-pbkdf2.h
+  lwc-finalists/src/combined/romulus-prng.c
+  lwc-finalists/src/combined/romulus-prng.h
+  lwc-finalists/src/combined/romulus-t-aead.c
+  lwc-finalists/src/combined/romulus-t-aead.h
+  lwc-finalists/src/combined/romulus-xof.c
+  lwc-finalists/src/combined/romulus-xof.h
+  lwc-finalists/src/combined/skinny-plus-bc.c
+  lwc-finalists/src/combined/skinny-plus-bc.h
+  lwc-finalists/src/combined/internal-romulus.c
+  lwc-finalists/src/combined/internal-romulus.h
+  lwc-finalists/src/combined/internal-skinny-plus.c
+  lwc-finalists/src/combined/internal-skinny-plus.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  LightweightCryptoPkg/LightweightCryptoPkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D__UEFI__
+  # warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+  # warning C4244: '+=': conversion from 'unsigned int' to 'unsigned char', possible loss of data
+  MSFT:*_*_*_CC_FLAGS = /wd4267 /wd4244

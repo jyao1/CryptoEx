@@ -1,0 +1,72 @@
+## @file
+#  library for the LWC.
+#
+#  Copyright (c) 2022, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = LwcLib
+  FILE_GUID                      = B4ADEB8B-FDEA-4D3B-8064-95BE8DA54769
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = LwcLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  lwc-finalists/src/combined/aead-metadata.c
+  lwc-finalists/src/combined/aead-metadata.h
+  lwc-finalists/src/combined/aead-random.c
+  lwc-finalists/src/combined/aead-random.h
+  lwc-finalists/src/combined/internal-hkdf.h
+  lwc-finalists/src/combined/internal-hmac.h
+  lwc-finalists/src/combined/internal-kmac.h
+  lwc-finalists/src/combined/internal-masking.h
+  lwc-finalists/src/combined/internal-pbkdf2.h
+  lwc-finalists/src/combined/internal-util.c
+  lwc-finalists/src/combined/internal-util.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QuantumSafePkg/QuantumSafePkg.dec
+  LightweightCryptoPkg/LightweightCryptoPkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  IntrinsicLib
+  SysCallLib
+  # Comparison Algo
+  LwcAesGcmLib
+  LwcChaChaPolyLib
+  LwcBlake2sLib
+  LwcSha256Lib
+  # AEAD+Hash
+  LwcAsconLib
+  LwcPhotonBeetleLib
+  LwcSparkleLib
+  LwcXoodyakLib
+  # AEAD-Only
+  LwcElephantLib
+  LwcIaspLib
+  LwcGiftCofbLib
+  LwcTinyJambuLib
+  LwcRomulusLib
+  LwcGrainLib
+
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D__UEFI__ -D__x86_64__
+  # warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+  # warning C4244: '+=': conversion from 'unsigned int' to 'unsigned char', possible loss of data
+  MSFT:*_*_*_CC_FLAGS = /wd4267 /wd4244

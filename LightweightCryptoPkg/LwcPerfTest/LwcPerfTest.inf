@@ -1,0 +1,60 @@
+## @file
+#  Shell application that will test the crypto library.
+#
+#  UEFI Application for the Validation of cryptography library (based on OpenSSL-1.0.2j).
+#
+#  Copyright (c) 2009 - 2016, Intel Corporation. All rights reserved.<BR>
+#  This program and the accompanying materials
+#  are licensed and made available under the terms and conditions of the BSD License
+#  which accompanies this distribution.  The full text of the license may be found at
+#  http://opensource.org/licenses/bsd-license.php
+#  
+#  THE PROGRAM IS DISTRIBUTED UNDER THE BSD LICENSE ON AN "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = LwcPerfTest
+  FILE_GUID                      = 3F24E71A-21FB-4EF9-855E-B609D9CF94D5
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = LwcPerfTestMain
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 IPF
+#
+
+[Sources]
+  LwcPerfTest.h
+  LwcPerfTest.c
+  LwcAead.c
+  LwcHash.c
+  Perf.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  QuantumSafePkg/QuantumSafePkg.dec
+  LightweightCryptoPkg/LightweightCryptoPkg.dec
+
+[LibraryClasses]
+  UefiApplicationEntryPoint
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  LwcLib
+
+[Guids]
+  gEfiHobMemoryAllocStackGuid                   ## SOMETIMES_PRODUCES ## HOB # MemoryAllocation StackHob
+  gEfiHobListGuid
+
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D__UEFI__
+  MSFT:*_*_*_CC_FLAGS = /wd4244
+

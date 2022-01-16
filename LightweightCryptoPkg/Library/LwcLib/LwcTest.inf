@@ -1,0 +1,76 @@
+## @file
+#  Test for the LWC.
+#
+#  Copyright (c) 2022, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = LwcTest
+  FILE_GUID                      = B0EE9E38-E92C-4BBA-80F7-B33BDD5406CE
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = TestEntryMain
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  lwc-finalists/test/unit/test-aes.c
+  lwc-finalists/test/unit/test-aesgcm.c
+  lwc-finalists/test/unit/test-ascon.c
+  lwc-finalists/test/unit/test-blake2s.c
+  lwc-finalists/test/unit/test-chachapoly.c
+  lwc-finalists/test/unit/test-cipher.c
+  lwc-finalists/test/unit/test-cipher.h
+  lwc-finalists/test/unit/test-ghash.c
+  lwc-finalists/test/unit/test-gift128.c
+  lwc-finalists/test/unit/test-grain128.c
+  lwc-finalists/test/unit/test-hkdf.c
+  lwc-finalists/test/unit/test-hmac.c
+  lwc-finalists/test/unit/test-keccak.c
+  lwc-finalists/test/unit/test-kmac.c
+  lwc-finalists/test/unit/test-main.c
+  lwc-finalists/test/unit/test-masking-common.c
+  lwc-finalists/test/unit/test-masking.c
+  lwc-finalists/test/unit/test-pbkdf2.c
+  lwc-finalists/test/unit/test-photon256.c
+  lwc-finalists/test/unit/test-romulus-xof.c
+  lwc-finalists/test/unit/test-sha256.c
+  lwc-finalists/test/unit/test-sha3.c
+  lwc-finalists/test/unit/test-sha3.h
+  lwc-finalists/test/unit/test-skinny-plus.c
+  lwc-finalists/test/unit/test-sparkle.c
+  lwc-finalists/test/unit/test-spongent.c
+  lwc-finalists/test/unit/test-tinyjambu.c
+  lwc-finalists/test/unit/test-xoodoo.c
+  lwc-finalists/src/combined/aead-metadata.h
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  QuantumSafePkg/QuantumSafePkg.dec
+  LightweightCryptoPkg/LightweightCryptoPkg.dec
+
+[LibraryClasses]
+  UefiApplicationEntryPoint
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  LwcLib
+  TestStubLib
+
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D__UEFI__
+  # warning C4244: '=': conversion from 'const uint32_t' to 'uint8_t', possible loss of data
+  # warning C4267: '=': conversion from 'size_t' to 'uint8_t', possible loss of data
+  # warning C4204: nonstandard extension used: non-constant aggregate initializer
+  # warning C4457: declaration of 'size' hides function parameter
+  MSFT:*_*_*_CC_FLAGS = /wd4244 /wd4267 /wd4204 /wd4457

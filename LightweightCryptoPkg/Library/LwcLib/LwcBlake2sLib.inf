@@ -1,0 +1,43 @@
+## @file
+#  library for the BLAKE2s.
+#
+#  Copyright (c) 2022, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = LwcBlake2sLib
+  FILE_GUID                      = 1376E2A0-1745-4821-9CFA-67A3DD7CB53B
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = LwcBlake2sLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  lwc-finalists/src/combined/internal-blake2s.c
+  lwc-finalists/src/combined/internal-blake2s.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  LightweightCryptoPkg/LightweightCryptoPkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D__UEFI__
+  # warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+  # warning C4244: '+=': conversion from 'unsigned int' to 'unsigned char', possible loss of data
+  MSFT:*_*_*_CC_FLAGS = /wd4267 /wd4244

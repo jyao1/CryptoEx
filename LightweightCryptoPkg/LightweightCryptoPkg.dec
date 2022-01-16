@@ -1,0 +1,27 @@
+## @file
+# This package provides EDKII LightweightCrypto related support.
+#
+# Copyright (c) 2022, Intel Corporation. All rights reserved.<BR>
+# SPDX-License-Identifier: BSD-2-Clause-Patent
+#
+##
+
+[Defines]
+  DEC_SPECIFICATION              = 0x00010005
+  PACKAGE_NAME                   = LightweightCrypto
+  PACKAGE_GUID                   = 4F31B818-49B8-4554-A1DE-AF81E3407BB7
+  PACKAGE_VERSION                = 0.1
+
+[Includes]
+  #Include
+
+[Includes.Common.Private]
+  Library/LwcLib/lwc-finalists/src/combined
+
+[LibraryClasses]
+
+[Guids]
+
+[Protocols]
+
+[PcdsFixedAtBuild, PcdsPatchableInModule]

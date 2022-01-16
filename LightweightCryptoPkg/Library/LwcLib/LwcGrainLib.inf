@@ -1,0 +1,48 @@
+## @file
+#  library for the LWC LwcGrainLib.
+#
+#  Copyright (c) 2022, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = LwcGrainLib
+  FILE_GUID                      = 61D3066A-20B1-48CB-B32B-14BAC1EDA410
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = LwcGrainLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  lwc-finalists/src/combined/grain-aead.c
+  lwc-finalists/src/combined/grain-aead.h
+  lwc-finalists/src/combined/grain-prng.c
+  lwc-finalists/src/combined/grain-prng.h
+  lwc-finalists/src/combined/internal-grain128.c
+  lwc-finalists/src/combined/internal-grain128.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  LightweightCryptoPkg/LightweightCryptoPkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D__UEFI__
+  # warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+  # warning C4244: '+=': conversion from 'unsigned int' to 'unsigned char', possible loss of data
+  # warning C4146: unary minus operator applied to unsigned type, result still unsigned
+  MSFT:*_*_*_CC_FLAGS = /wd4267 /wd4244 /wd4146

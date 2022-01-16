@@ -1,0 +1,47 @@
+## @file
+#  library for the AES-GCM.
+#
+#  Copyright (c) 2022, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = LwcAesGcmLib
+  FILE_GUID                      = E54CCA8F-5A39-4505-8DEF-D7EFC3356C34
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = LwcAesGcmLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  lwc-finalists/src/combined/aesgcm-aead.c
+  lwc-finalists/src/combined/aesgcm-aead.h
+  lwc-finalists/src/combined/internal-aes.c
+  lwc-finalists/src/combined/internal-aes.h
+  lwc-finalists/src/combined/internal-ghash.c
+  lwc-finalists/src/combined/internal-ghash.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  LightweightCryptoPkg/LightweightCryptoPkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D__UEFI__
+  # warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+  # warning C4244: '+=': conversion from 'unsigned int' to 'unsigned char', possible loss of data
+  MSFT:*_*_*_CC_FLAGS = /wd4267 /wd4244

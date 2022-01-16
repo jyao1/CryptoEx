@@ -1,0 +1,51 @@
+## @file
+#  Test for the LWC.
+#
+#  Copyright (c) 2022, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = LwcKat
+  FILE_GUID                      = 1B6C66D8-D59B-4E30-8BF1-9834DA0B7247
+  MODULE_TYPE                    = UEFI_APPLICATION
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = TestEntryMain
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  kat.c
+  lwc-finalists/test/kat/algorithms.c
+  lwc-finalists/test/kat/timing.c
+  lwc-finalists/src/combined/aead-metadata.h
+  
+[Packages]
+  MdePkg/MdePkg.dec
+  QuantumSafePkg/QuantumSafePkg.dec
+  LightweightCryptoPkg/LightweightCryptoPkg.dec
+
+[LibraryClasses]
+  UefiApplicationEntryPoint
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  LwcLib
+  TestStubLib
+
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D__UEFI__
+  # warning C4244: '=': conversion from 'const uint32_t' to 'uint8_t', possible loss of data
+  # warning C4267: '=': conversion from 'size_t' to 'uint8_t', possible loss of data
+  # warning C4204: nonstandard extension used: non-constant aggregate initializer
+  MSFT:*_*_*_CC_FLAGS = /wd4244 /wd4267 /wd4204
+  

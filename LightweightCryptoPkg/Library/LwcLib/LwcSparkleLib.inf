@@ -1,0 +1,57 @@
+## @file
+#  library for the LWC Sparkle.
+#
+#  Copyright (c) 2022, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = LwcSparkleLib
+  FILE_GUID                      = 3B609977-A0CB-4AAD-8C54-A2BFD53FA2B8
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = LwcSparkleLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  lwc-finalists/src/combined/sparkle-aead.c
+  lwc-finalists/src/combined/sparkle-aead.h
+  lwc-finalists/src/combined/sparkle-hash.c
+  lwc-finalists/src/combined/sparkle-hash.h
+  lwc-finalists/src/combined/sparkle-hkdf.c
+  lwc-finalists/src/combined/sparkle-hkdf.h
+  lwc-finalists/src/combined/sparkle-hmac.c
+  lwc-finalists/src/combined/sparkle-hmac.h
+  lwc-finalists/src/combined/sparkle-kmac.c
+  lwc-finalists/src/combined/sparkle-kmac.h
+  lwc-finalists/src/combined/sparkle-pbkdf2.c
+  lwc-finalists/src/combined/sparkle-pbkdf2.h
+  lwc-finalists/src/combined/sparkle-prng.c
+  lwc-finalists/src/combined/sparkle-prng.h
+  lwc-finalists/src/combined/internal-sparkle.c
+  lwc-finalists/src/combined/internal-sparkle.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  LightweightCryptoPkg/LightweightCryptoPkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D__UEFI__
+  # warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+  # warning C4244: '+=': conversion from 'unsigned int' to 'unsigned char', possible loss of data
+  MSFT:*_*_*_CC_FLAGS = /wd4267 /wd4244

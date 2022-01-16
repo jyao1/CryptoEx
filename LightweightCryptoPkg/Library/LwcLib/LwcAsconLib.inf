@@ -1,0 +1,67 @@
+## @file
+#  library for the LWC Ascon.
+#
+#  Copyright (c) 2022, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = LwcAsconLib
+  FILE_GUID                      = 90D14C3C-6349-48EB-AEE7-4BE1021CFFE0
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = LwcAsconLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  lwc-finalists/src/combined/ascon-aead-masked.c
+  lwc-finalists/src/combined/ascon-aead-masked.h
+  lwc-finalists/src/combined/ascon-aead.c
+  lwc-finalists/src/combined/ascon-aead.h
+  lwc-finalists/src/combined/ascon-hash.c
+  lwc-finalists/src/combined/ascon-hash.h
+  lwc-finalists/src/combined/ascon-hkdf.c
+  lwc-finalists/src/combined/ascon-hkdf.h
+  lwc-finalists/src/combined/ascon-hmac.c
+  lwc-finalists/src/combined/ascon-hmac.h
+  lwc-finalists/src/combined/ascon-kmac.c
+  lwc-finalists/src/combined/ascon-kmac.h
+  lwc-finalists/src/combined/ascon-pbkdf2.c
+  lwc-finalists/src/combined/ascon-pbkdf2.h
+  lwc-finalists/src/combined/ascon-permutation.c
+  lwc-finalists/src/combined/ascon-permutation.h
+  lwc-finalists/src/combined/ascon-prng.c
+  lwc-finalists/src/combined/ascon-prng.h
+  lwc-finalists/src/combined/ascon-siv.c
+  lwc-finalists/src/combined/ascon-siv.h
+  lwc-finalists/src/combined/ascon-xof.c
+  lwc-finalists/src/combined/ascon-xof.h
+  lwc-finalists/src/combined/internal-ascon-m2.c
+  lwc-finalists/src/combined/internal-ascon-m2.h
+  lwc-finalists/src/combined/internal-ascon.c
+  lwc-finalists/src/combined/internal-ascon.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  LightweightCryptoPkg/LightweightCryptoPkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D__UEFI__
+  # warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+  # warning C4244: '+=': conversion from 'unsigned int' to 'unsigned char', possible loss of data
+  MSFT:*_*_*_CC_FLAGS = /wd4267 /wd4244

@@ -1,0 +1,61 @@
+## @file
+#  library for the LWC Xoodyak.
+#
+#  Copyright (c) 2022, Intel Corporation. All rights reserved.<BR>
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+#  
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = LwcXoodyakLib
+  FILE_GUID                      = 7ABCCF5F-C7F6-4802-857E-8D21B717EA34
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  LIBRARY_CLASS                  = LwcXoodyakLib
+
+#
+# The following information is for reference only and not required by the build tools.
+#
+#  VALID_ARCHITECTURES           = IA32 X64 ARM AARCH64
+#
+
+[Sources]
+  lwc-finalists/src/combined/xoodyak-aead.c
+  lwc-finalists/src/combined/xoodyak-aead.h
+  lwc-finalists/src/combined/xoodyak-hash.c
+  lwc-finalists/src/combined/xoodyak-hash.h
+  lwc-finalists/src/combined/xoodyak-hkdf.c
+  lwc-finalists/src/combined/xoodyak-hkdf.h
+  lwc-finalists/src/combined/xoodyak-hmac.c
+  lwc-finalists/src/combined/xoodyak-hmac.h
+  lwc-finalists/src/combined/xoodyak-kmac.c
+  lwc-finalists/src/combined/xoodyak-kmac.h
+  lwc-finalists/src/combined/xoodyak-masked.c
+  lwc-finalists/src/combined/xoodyak-masked.h
+  lwc-finalists/src/combined/xoodyak-pbkdf2.c
+  lwc-finalists/src/combined/xoodyak-pbkdf2.h
+  lwc-finalists/src/combined/xoodyak-prng.c
+  lwc-finalists/src/combined/xoodyak-prng.h
+  lwc-finalists/src/combined/internal-xoodoo-m.c
+  lwc-finalists/src/combined/internal-xoodoo-m.h
+  lwc-finalists/src/combined/internal-xoodoo.c
+  lwc-finalists/src/combined/internal-xoodoo.h
+
+[Packages]
+  MdePkg/MdePkg.dec
+  LightweightCryptoPkg/LightweightCryptoPkg.dec
+
+[LibraryClasses]
+  UefiLib
+  BaseLib
+  UefiBootServicesTableLib
+  BaseMemoryLib
+  DebugLib
+  MemoryAllocationLib
+  
+[BuildOptions]
+  *_*_*_CC_FLAGS = -D__UEFI__
+  # warning C4267: 'initializing': conversion from 'size_t' to 'unsigned int', possible loss of data
+  # warning C4244: '+=': conversion from 'unsigned int' to 'unsigned char', possible loss of data
+  MSFT:*_*_*_CC_FLAGS = /wd4267 /wd4244
