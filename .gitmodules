@@ -7,3 +7,6 @@
 [submodule "QuantumSafeXmssRefPkg/Library/XmssLib/xmss-reference"]
 	path = QuantumSafeXmssRefPkg/Library/XmssLib/xmss-reference
 	url = https://github.com/jyao1/xmss-reference
+[submodule "LightweightCryptoPkg/Library/LwcLib/lwc-finalists"]
+	path = LightweightCryptoPkg/Library/LwcLib/lwc-finalists
+	url = https://github.com/jyao1/lwc-finalists
