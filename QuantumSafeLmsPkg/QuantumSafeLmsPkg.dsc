@@ -90,6 +90,7 @@
   IntrinsicLib|CryptoPkg/Library/IntrinsicLib/IntrinsicLib.inf
   OpensslLib|CryptoPkg/Library/OpensslLib/OpensslLib.inf
   RngLib|MdePkg/Library/BaseRngLib/BaseRngLib.inf
+  RegisterFilterLib|MdePkg/Library/RegisterFilterLibNull/RegisterFilterLibNull.inf
 
   SysCallLib|QuantumSafePkg/Library/SysCallLib/SysCallLib.inf
   TestStubLib|QuantumSafePkg/Library/TestStubLib/TestStubLib.inf
